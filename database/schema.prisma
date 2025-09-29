@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Event {
+  id            String   @id @default(cuid())
+  title         String
+  description   String?
+  startDate     DateTime
+  endDate       DateTime?
+  locationName  String?
+  streetAddress String?
+  city          String?
+  state         String?
+  zipCode       String?
+  latitude      Float?
+  longitude     Float?
+  eventUrl      String
+  imageUrl      String?
+  category      String?
+  price         String?
+  organizer     String?
+  contactInfo   String?
+  sourceWebsite String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  scrapedAt     DateTime?
+
+  @@unique([title, startDate, locationName])
+}
+
+model SourceWebsite {
+  id              String   @id @default(cuid())
+  url             String   @unique
+  name            String
+  isActive        Boolean  @default(true)
+  lastScrapedAt   DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  scrapingConfig  Json?
+  
+  // Relationship: One SourceWebsite can have many Events
+  events        Event[]
+  scrapingLogs  ScrapingLog[]
+}
+
+model ScrapingLog {
+  id              String        @id @default(cuid())
+  sourceWebsiteId String
+  sourceWebsite   SourceWebsite @relation(fields: [sourceWebsiteId], references: [id], onDelete: Cascade)
+  status          String        // success, error, partial
+  eventsFound     Int
+  eventsAdded     Int
+  eventsUpdated   Int
+  eventsSkipped   Int           // duplicates
+  durationMs      Int
+  errorDetails    String?
+  scrapedAt       DateTime      @default(now())
+}

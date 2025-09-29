@@ -83,6 +83,34 @@ mutation {
 3. Click on an event to view its details
 4. Confirm all event information is displayed correctly
 
+## Deployment Instructions
+
+### Docker Deployment
+```bash
+# Build and start all services with Docker Compose
+docker-compose up --build
+
+# The application will be available at:
+# - Frontend: http://localhost:3000
+# - Backend: http://localhost:4000/graphql
+# - PostgreSQL: localhost:5432
+```
+
+### Production Deployment
+1. Set environment variables for production
+2. Build the frontend application:
+   ```bash
+   cd frontend && npm run build
+   ```
+3. Build the backend application:
+   ```bash
+   cd backend && npm run build
+   ```
+4. Run the production server:
+   ```bash
+   cd backend && npm start
+   ```
+
 ## Troubleshooting
 - If database migrations fail, ensure PostgreSQL is running and credentials are correct
 - If scraping doesn't work, check that the source websites are accessible and scraping configuration is correct

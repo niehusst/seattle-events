@@ -1,0 +1,110 @@
+# GraphQL Schema for Seattle Events Web Application
+
+# Types
+type Event {
+  id: ID!
+  title: String!
+  description: String
+  startDate: DateTime!
+  endDate: DateTime
+  locationName: String
+  streetAddress: String
+  city: String
+  state: String
+  zipCode: String
+  latitude: Float
+  longitude: Float
+  eventUrl: String!
+  imageUrl: String
+  category: String
+  price: String
+  organizer: String
+  contactInfo: String
+  sourceWebsite: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  scrapedAt: DateTime
+}
+
+type SourceWebsite {
+  id: ID!
+  url: String!
+  name: String!
+  isActive: Boolean!
+  lastScrapedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  scrapingConfig: String
+}
+
+type ScrapingLog {
+  id: ID!
+  sourceWebsite: SourceWebsite!
+  status: String!
+  eventsFound: Int!
+  eventsAdded: Int!
+  eventsUpdated: Int!
+  eventsSkipped: Int!
+  durationMs: Int!
+  errorDetails: String
+  scrapedAt: DateTime!
+}
+
+# Input types
+input EventFilterInput {
+  category: String
+  location: String
+  startDate: DateTime
+  endDate: DateTime
+  searchQuery: String
+}
+
+input DateTimeFilterInput {
+  after: DateTime
+  before: DateTime
+}
+
+# Queries
+type Query {
+  # Get all events, with optional filtering and pagination
+  events(
+    filter: EventFilterInput
+    dateRange: DateTimeFilterInput
+    limit: Int = 20
+    offset: Int = 0
+  ): [Event!]!
+  
+  # Get a single event by ID
+  event(id: ID!): Event
+  
+  # Get events in reverse chronological order (most recent first)
+  eventsReverseChronological(
+    limit: Int = 20
+    offset: Int = 0
+  ): [Event!]!
+  
+  # Get events for a specific date
+  eventsByDate(date: Date!): [Event!]!
+  
+  # Get events by category
+  eventsByCategory(category: String!): [Event!]!
+  
+  # Get upcoming events
+  upcomingEvents(limit: Int = 20): [Event!]!
+  
+  # Get source websites
+  sourceWebsites: [SourceWebsite!]!
+  
+  # Get scraping logs
+  scrapingLogs(limit: Int = 20, offset: Int = 0): [ScrapingLog!]!
+}
+
+# Mutations (if needed for admin functionality)
+type Mutation {
+  # Trigger a manual scraping operation
+  triggerScrape(sourceWebsiteId: ID!): Boolean!
+}
+
+# Scalar types
+scalar DateTime
+scalar Date
