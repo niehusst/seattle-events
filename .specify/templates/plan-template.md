@@ -47,7 +47,11 @@
 ## Constitution Check
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+**Code Quality Standards**: All code must adhere to established style guides and pass static analysis
+**Test-Driven Development**: All features must start with test creation before implementation (minimum 85% coverage)
+**Performance Requirements**: All features must meet performance benchmarks before acceptance
+**Comprehensive Test Coverage**: All functions require unit tests, service interactions need integration tests
+**Quality Assurance Pipeline**: All changes require peer code reviews and automated quality gates
 
 ## Project Structure
 

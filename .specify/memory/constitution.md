@@ -1,50 +1,47 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!-- SYNC IMPACT REPORT:
+Version change: N/A (initial version) → 1.0.0
+Modified principles: N/A (first version)
+Added sections: All sections (initial constitution)
+Removed sections: N/A
+Templates requiring updates: 
+- .specify/templates/plan-template.md ✅ updated
+- .specify/templates/spec-template.md ✅ updated  
+- .specify/templates/tasks-template.md ✅ updated
+- .specify/templates/agent-file-template.md ⚠ pending (manual review)
+- .specify/commands/*.md ⚠ pending (manual review)
+- README.md ⚠ pending (manual review if exists)
+Follow-up TODOs: None
+-->
+
+# Seattle Events Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### Code Quality Standards
+Code must adhere to established style guides and best practices; All code submissions require static analysis passes with tools like linters; Complexity must be justified and minimized wherever possible.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### Test-Driven Development (NON-NEGOTIABLE) 
+All features and bug fixes start with test creation before implementation; Tests must achieve minimum 85% code coverage; Test-driven development cycle (red-green-refactor) strictly enforced.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### Performance-First Approach
+All features must meet performance benchmarks before acceptance; Response times must remain under 200ms for core functionality; Resource optimization is prioritized to ensure scalability.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### Comprehensive Test Coverage
+Unit tests required for all functions; Integration tests for service interactions; End-to-end tests for critical user flows; Test documentation must accompany all test suites.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### Quality Assurance Pipeline
+Automated quality gates must pass before code merge; Peer code reviews are mandatory for all pull requests; Continuous integration validates code quality standards.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Additional Constraints
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+Performance standards must be measured and documented; All code must pass security scanning before deployment; Dependencies must be kept up-to-date with security patches.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Development Workflow
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+Code reviews must verify compliance with all constitutional principles; All changes require approval from at least one senior developer; Automated tests must pass before merging to main branch.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This Constitution supersedes all other development practices; Amendments require documented justification and team consensus; All PRs/reviews must verify compliance with constitutional principles.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2025-09-29 | **Last Amended**: 2025-09-29
