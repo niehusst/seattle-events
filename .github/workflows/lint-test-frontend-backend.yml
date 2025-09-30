@@ -1,0 +1,39 @@
+name: Lint and Test Frontend and Backend
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        cache-dependency-path: '**/package-lock.json'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run frontend linting
+      run: npm run lint
+      working-directory: frontend
+      
+    - name: Run frontend tests
+      run: npm run test:run
+      working-directory: frontend
+
+    - name: Run backend linting
+      run: npm run lint
+      working-directory: backend
+
+    - name: Run backend tests
+      run: npm run test
+      working-directory: backend
