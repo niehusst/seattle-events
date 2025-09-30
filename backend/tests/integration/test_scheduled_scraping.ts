@@ -13,10 +13,20 @@ describe('Integration test for event scheduling', () => {
     scheduledScrapingService = new ScheduledScrapingService();
   });
 
+  afterEach(() => {
+    scheduledScrapingService.stop();
+  });
+
   it('should schedule and execute scraping at configured intervals', async () => {
     // Mock the internal scraping service methods
-    const mockInitialize = jest.spyOn((scheduledScrapingService as any).scrapingService, 'initialize');
-    const mockScrapeAll = jest.spyOn((scheduledScrapingService as any).scrapingService, 'scrapeAllWebsites');
+    const mockInitialize = jest.spyOn(
+      (scheduledScrapingService as any).scrapingService,
+      'initialize'
+    );
+    const mockScrapeAll = jest.spyOn(
+      (scheduledScrapingService as any).scrapingService,
+      'scrapeAllWebsites'
+    );
     mockInitialize.mockResolvedValue(undefined);
     mockScrapeAll.mockResolvedValue(undefined);
 
@@ -30,7 +40,10 @@ describe('Integration test for event scheduling', () => {
 
   it('should allow manual triggering of scraping', async () => {
     // Mock the scraping method
-    const mockScrapeAll = jest.spyOn((scheduledScrapingService as any).scrapingService, 'scrapeAllWebsites');
+    const mockScrapeAll = jest.spyOn(
+      (scheduledScrapingService as any).scrapingService,
+      'scrapeAllWebsites'
+    );
     mockScrapeAll.mockResolvedValue(undefined);
 
     // Call the forceScrape method
@@ -43,13 +56,13 @@ describe('Integration test for event scheduling', () => {
   it('should stop scheduled scraping when requested', () => {
     // Mock a scheduled task object
     const mockTask = {
-      stop: jest.fn()
+      stop: jest.fn(),
     };
-    
+
     // Set the internal task property to our mock
     Object.defineProperty(scheduledScrapingService, 'task', {
       value: mockTask,
-      writable: true
+      writable: true,
     });
 
     // Call stop to stop the scheduled scraping
