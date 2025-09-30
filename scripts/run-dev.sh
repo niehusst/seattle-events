@@ -43,7 +43,7 @@ run_backend() {
 
     # Run database migrations first
     echo "Running database migrations..."
-    npx prisma migrate deploy --schema=../database/schema.prisma || echo "Migration check completed (may have already run)"
+    npm run prisma:migrate
 
     # Start the backend server
     npm run dev &

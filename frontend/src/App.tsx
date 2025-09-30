@@ -7,6 +7,7 @@ import EventFilters from './components/EventFilters';
 const App = () => {
   const [filters, setFilters] = useState<IEventFilter>({});
 
+  // TODO: enable paging w/ offset
   const { loading, error, data, refetch } = useQuery(GET_EVENTS, {
     variables: {
       filter: filters,
