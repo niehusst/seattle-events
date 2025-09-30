@@ -8,9 +8,9 @@ const EventsReverseChronological: FC = () => {
   return (
     <div className="events-reverse-chronological-page">
       <h1>Events in Reverse Chronological Order</h1>
-      
-      <EventList 
-        events={data?.eventsReverseChronological || []} 
+
+      <EventList
+        events={data?.eventsReverseChronological || []}
         loading={loading}
         error={error?.message}
       />

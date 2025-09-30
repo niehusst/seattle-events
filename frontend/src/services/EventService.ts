@@ -2,7 +2,12 @@ import { gql, useQuery, useMutation } from '@apollo/client';
 
 // Define GraphQL queries and mutations
 const GET_EVENTS = gql`
-  query GetEvents($limit: Int, $offset: Int, $filter: EventFilterInput, $dateRange: DateTimeFilterInput) {
+  query GetEvents(
+    $limit: Int
+    $offset: Int
+    $filter: EventFilterInput
+    $dateRange: DateTimeFilterInput
+  ) {
     events(limit: $limit, offset: $offset, filter: $filter, dateRange: $dateRange) {
       id
       title
@@ -122,7 +127,7 @@ export interface IEvent {
   title: string;
   description?: string;
   startDate: string; // ISO string
-  endDate?: string;  // ISO string
+  endDate?: string; // ISO string
   locationName?: string;
   streetAddress?: string;
   city?: string;
@@ -155,38 +160,38 @@ export const EventService = {
   // Query hooks
   useEvents: (limit?: number, offset?: number, filter?: IEventFilter, dateRange?: any) => {
     return useQuery(GET_EVENTS, {
-      variables: { limit, offset, filter, dateRange }
+      variables: { limit, offset, filter, dateRange },
     });
   },
 
   useEvent: (id: string) => {
     return useQuery(GET_EVENT, {
-      variables: { id }
+      variables: { id },
     });
   },
 
   useReverseChronologicalEvents: (limit?: number, offset?: number) => {
     return useQuery(GET_REVERSE_CHRONOLOGICAL_EVENTS, {
-      variables: { limit, offset }
+      variables: { limit, offset },
     });
   },
 
   useEventsByCategory: (category: string) => {
     return useQuery(GET_EVENTS_BY_CATEGORY, {
-      variables: { category }
+      variables: { category },
     });
   },
 
   useUpcomingEvents: (limit?: number) => {
     return useQuery(GET_UPCOMING_EVENTS, {
-      variables: { limit }
+      variables: { limit },
     });
   },
 
   // Mutation hooks
   useTriggerScrape: () => {
     return useMutation(TRIGGER_SCRAPE);
-  }
+  },
 };
 
 export {
@@ -195,5 +200,5 @@ export {
   GET_REVERSE_CHRONOLOGICAL_EVENTS,
   GET_EVENTS_BY_CATEGORY,
   GET_UPCOMING_EVENTS,
-  TRIGGER_SCRAPE
+  TRIGGER_SCRAPE,
 };

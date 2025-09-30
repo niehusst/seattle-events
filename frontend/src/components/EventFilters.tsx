@@ -26,12 +26,15 @@ const EventFilters: FC<EventFiltersProps> = ({ onFilter }) => {
       category: category || undefined,
       location: location || undefined,
       searchQuery: searchQuery || undefined,
-      dateRange: (startDate || endDate) ? { 
-        after: startDate || undefined, 
-        before: endDate || undefined 
-      } : undefined
+      dateRange:
+        startDate || endDate
+          ? {
+              after: startDate || undefined,
+              before: endDate || undefined,
+            }
+          : undefined,
     };
-    
+
     onFilter(filters);
   };
 
@@ -41,14 +44,14 @@ const EventFilters: FC<EventFiltersProps> = ({ onFilter }) => {
     setStartDate('');
     setEndDate('');
     setSearchQuery('');
-    
+
     onFilter({});
   };
 
   return (
     <div className="event-filters">
       <h3>Filter Events</h3>
-      
+
       <div className="filter-group">
         <label htmlFor="search">Search:</label>
         <input
@@ -59,14 +62,10 @@ const EventFilters: FC<EventFiltersProps> = ({ onFilter }) => {
           onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
-      
+
       <div className="filter-group">
         <label htmlFor="category">Category:</label>
-        <select
-          id="category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        >
+        <select id="category" value={category} onChange={(e) => setCategory(e.target.value)}>
           <option value="">All Categories</option>
           <option value="concert">Concert</option>
           <option value="festival">Festival</option>
@@ -78,7 +77,7 @@ const EventFilters: FC<EventFiltersProps> = ({ onFilter }) => {
           <option value="film">Film</option>
         </select>
       </div>
-      
+
       <div className="filter-group">
         <label htmlFor="location">Location:</label>
         <input
@@ -89,7 +88,7 @@ const EventFilters: FC<EventFiltersProps> = ({ onFilter }) => {
           onChange={(e) => setLocation(e.target.value)}
         />
       </div>
-      
+
       <div className="filter-group">
         <label htmlFor="startDate">Start Date:</label>
         <input
@@ -99,7 +98,7 @@ const EventFilters: FC<EventFiltersProps> = ({ onFilter }) => {
           onChange={(e) => setStartDate(e.target.value)}
         />
       </div>
-      
+
       <div className="filter-group">
         <label htmlFor="endDate">End Date:</label>
         <input
@@ -109,10 +108,14 @@ const EventFilters: FC<EventFiltersProps> = ({ onFilter }) => {
           onChange={(e) => setEndDate(e.target.value)}
         />
       </div>
-      
+
       <div className="filter-actions">
-        <button onClick={handleFilter} className="btn btn-primary">Apply Filters</button>
-        <button onClick={handleReset} className="btn btn-secondary">Reset</button>
+        <button onClick={handleFilter} className="btn btn-primary">
+          Apply Filters
+        </button>
+        <button onClick={handleReset} className="btn btn-secondary">
+          Reset
+        </button>
       </div>
     </div>
   );

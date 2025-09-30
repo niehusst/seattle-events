@@ -19,7 +19,7 @@ const EventList: FC<EventListProps> = ({ events, loading, error }) => {
         <p>No events found.</p>
       ) : (
         <div className="events-grid">
-          {events.map(event => (
+          {events.map((event) => (
             <EventCard key={event.id} event={event} />
           ))}
         </div>

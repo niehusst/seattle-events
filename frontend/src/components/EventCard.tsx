@@ -21,8 +21,8 @@ const EventCard: FC<EventCardProps> = ({ event }) => {
         {event.locationName && <p className="event-location">{event.locationName}</p>}
         {event.description && (
           <p className="event-description">
-            {event.description.length > 150 
-              ? `${event.description.substring(0, 150)}...` 
+            {event.description.length > 150
+              ? `${event.description.substring(0, 150)}...`
               : event.description}
           </p>
         )}

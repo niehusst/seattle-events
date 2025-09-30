@@ -6,15 +6,15 @@ import EventFilters from './components/EventFilters';
 
 const App = () => {
   const [filters, setFilters] = useState<IEventFilter>({});
-  
+
   const { loading, error, data, refetch } = useQuery(GET_EVENTS, {
-    variables: { 
+    variables: {
       filter: filters,
       limit: 20,
-      offset: 0
+      offset: 0,
     },
     // Don't automatically fetch until filters are applied (or for initial load)
-    fetchPolicy: 'cache-and-network'
+    fetchPolicy: 'cache-and-network',
   });
 
   const handleFilterChange = (newFilters: any) => {
@@ -23,7 +23,7 @@ const App = () => {
     refetch({
       filter: newFilters,
       limit: 20,
-      offset: 0
+      offset: 0,
     });
   };
 
@@ -40,11 +40,7 @@ const App = () => {
         </aside>
 
         <section className="events-section">
-          <EventList 
-            events={data?.events || []} 
-            loading={loading}
-            error={error?.message}
-          />
+          <EventList events={data?.events || []} loading={loading} error={error?.message} />
         </section>
       </main>
     </div>
