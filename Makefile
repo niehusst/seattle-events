@@ -1,7 +1,7 @@
 # Seattle Events Makefile
 # Contains targets for common development tasks
 
-.PHONY: help install run clean db-migrate db-reset db-seed db-full-reset
+.PHONY: help install run clean db-migrate db-reset db-seed db-full-reset db-gen-schema
 
 SHELL := /bin/bash
 
@@ -9,14 +9,15 @@ help:
 	@echo "Seattle Events Development Makefile"
 	@echo "===================================="
 	@echo "Available targets:"
-	@echo "  help        - Show this help message"
-	@echo "  install     - Install all dependencies for development"
-	@echo "  run         - Run all system components for development"
-	@echo "  clean       - Clean build artifacts and node_modules"
-	@echo "  db-migrate  - Run database migrations"
-	@echo "  db-reset    - Reset database to initial state"
-	@echo "  db-seed     - Seed database with sample data for testing"
-	@echo "  db-full-reset - Drop and recreate database and user from .env"
+	@echo "  help           - Show this help message"
+	@echo "  install        - Install all dependencies for development"
+	@echo "  run            - Run all system components for development"
+	@echo "  clean          - Clean build artifacts and node_modules"
+	@echo "  db-migrate     - Run database migrations"
+	@echo "  db-gen-schema  - Generate db schema for prisma client"
+	@echo "  db-reset    	- Reset database to initial state"
+	@echo "  db-seed     	- Seed database with sample data for testing"
+	@echo "  db-full-reset  - Drop and recreate database and user from .env"
 
 install:
 	@echo "Installing development dependencies..."
@@ -37,12 +38,12 @@ clean:
 
 db-migrate:
 	@echo "Running database migrations..."
-	@cd backend && npx prisma migrate dev --schema=../database/schema.prisma
+	@cd backend && npm run prisma:migrate
 	@echo "Database migrations completed."
 
 db-reset:
 	@echo "Resetting database to initial state..."
-	@cd backend && npx prisma migrate reset --schema=../database/schema.prisma
+	@cd backend && npx prisma migrate reset --schema=./database/schema.prisma
 	@echo "Database reset completed."
 
 db-seed:
@@ -54,3 +55,8 @@ db-full-reset:
 	@echo "Dropping and recreating database and user..."
 	@./scripts/reset-db.sh
 	@echo "Database and user reset completed. Run 'make db-migrate' to set up tables."
+
+db-gen-schema:
+	@echo "Setting up Prisma..."
+	@cd backend && npm run prisma:generate
+	@echo "Prisma schema generated."

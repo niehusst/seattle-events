@@ -58,10 +58,7 @@ cd ./frontend
 npm install
 cd ..
 
-echo "Setting up Prisma.."
-cd ./backend
-npx prisma generate --schema=../database/schema.prisma
-cd ..
+make db-gen-schema
 
 echo "Installation complete!"
 echo ""
