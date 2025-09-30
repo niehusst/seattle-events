@@ -1,11 +1,10 @@
-import React from 'react';
+import { FC } from 'react';
 import { useParams } from 'react-router-dom';
-import { useEvent } from '../services/EventService';
-import { IEvent } from '../services/EventService';
+import { EventService, IEvent } from '../services/EventService';
 
-const EventDetail: React.FC = () => {
+const EventDetail: FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { loading, error, data } = useEvent(id!);
+  const { loading, error, data } = EventService.useEvent(id!);
 
   if (loading) return <div>Loading event...</div>;
   if (error) return <div>Error: {error.message}</div>;

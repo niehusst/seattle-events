@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { IEvent } from '../services/EventService';
 import { Link } from 'react-router-dom';
 
@@ -6,7 +6,7 @@ interface EventCardProps {
   event: IEvent;
 }
 
-const EventCard: React.FC<EventCardProps> = ({ event }) => {
+const EventCard: FC<EventCardProps> = ({ event }) => {
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);

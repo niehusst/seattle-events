@@ -1,17 +1,14 @@
-// This is already implemented in the graphqlClient.ts file
-// The frontend Apollo Client is integrated by importing and using the client
-// in the App component or other components that need GraphQL operations
-
-import client from './services/graphqlClient';
+import { StrictMode } from 'react';
+import ReactDOM from 'react-dom/client';
+import { RouterProvider } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/client/react';
-import App from './App';
+import client from './services/graphqlClient';
+import { router } from './router';
 
-// The ApolloProvider wraps the App component to make the client available
-// throughout the component tree
-const AppWithApollo = () => (
-  <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <ApolloProvider client={client}>
+      <RouterProvider router={router} />
+    </ApolloProvider>
+  </StrictMode>,
 );
-
-export default AppWithApollo;

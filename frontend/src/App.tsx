@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useQuery } from '@apollo/client';
-import { GET_EVENTS } from './services/EventService';
+import { GET_EVENTS, IEventFilter } from './services/EventService';
 import EventList from './components/EventList';
 import EventFilters from './components/EventFilters';
-import { IEvent, IEventFilter } from './services/EventService';
 
-const App: React.FC = () => {
+const App = () => {
   const [filters, setFilters] = useState<IEventFilter>({});
   
   const { loading, error, data, refetch } = useQuery(GET_EVENTS, {

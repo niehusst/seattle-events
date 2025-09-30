@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+import { FC, useState } from 'react';
 
-interface EventFiltersProps {
-  onFilter: (filters: any) => void;
+interface IEventFilter {
+  category?: string;
+  location?: string;
+  searchQuery?: string;
+  dateRange?: {
+    after?: string;
+    before?: string;
+  };
 }
 
-const EventFilters: React.FC<EventFiltersProps> = ({ onFilter }) => {
+interface EventFiltersProps {
+  onFilter: (filters: IEventFilter) => void;
+}
+
+const EventFilters: FC<EventFiltersProps> = ({ onFilter }) => {
   const [category, setCategory] = useState('');
   const [location, setLocation] = useState('');
   const [startDate, setStartDate] = useState('');
@@ -28,8 +38,8 @@ const EventFilters: React.FC<EventFiltersProps> = ({ onFilter }) => {
   const handleReset = () => {
     setCategory('');
     setLocation('');
-    startDate('');
-    endDate('');
+    setStartDate('');
+    setEndDate('');
     setSearchQuery('');
     
     onFilter({});

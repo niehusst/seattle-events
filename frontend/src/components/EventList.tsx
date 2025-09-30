@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { IEvent } from '../services/EventService';
 import EventCard from './EventCard'; // Assuming we have an EventCard component
 
@@ -8,7 +8,7 @@ interface EventListProps {
   error?: string;
 }
 
-const EventList: React.FC<EventListProps> = ({ events, loading, error }) => {
+const EventList: FC<EventListProps> = ({ events, loading, error }) => {
   if (loading) return <div>Loading events...</div>;
   if (error) return <div>Error: {error}</div>;
 

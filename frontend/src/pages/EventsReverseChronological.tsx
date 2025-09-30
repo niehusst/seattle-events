@@ -1,9 +1,9 @@
-import React from 'react';
-import { useReverseChronologicalEvents } from '../services/EventService';
+import { FC } from 'react';
+import { EventService } from '../services/EventService';
 import EventList from '../components/EventList';
 
-const EventsReverseChronological: React.FC = () => {
-  const { loading, error, data } = useReverseChronologicalEvents(20, 0);
+const EventsReverseChronological: FC = () => {
+  const { loading, error, data } = EventService.useReverseChronologicalEvents(20, 0);
 
   return (
     <div className="events-reverse-chronological-page">
