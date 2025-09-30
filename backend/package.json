@@ -50,7 +50,31 @@
     "nodemon": "^2.0.22",
     "prettier": "^2.8.7",
     "supertest": "^6.3.3",
+    "ts-jest": "^29.4.4",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.5"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "roots": ["<rootDir>/tests"],
+    "testMatch": [
+      "**/?(*.)+(spec|test).ts?(x)",
+      "**/tests/**/*.ts"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/testUtils.ts"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!src/**/*.d.ts"
+    ],
+    "coverageDirectory": "coverage",
+    "coverageReporters": ["text", "lcov", "html"],
+    "transform": {
+      "^.+\\\\.tsx?$": "ts-jest"
+    },
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
   }
 }
