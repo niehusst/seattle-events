@@ -3,6 +3,10 @@ import { startStandaloneServer } from '@apollo/server/standalone';
 import { typeDefs } from './schema';
 import { resolvers } from './resolvers';
 import { ScheduledScrapingService } from './services/ScheduledScrapingService';
+import dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
 
 async function startServer() {
   const server = new ApolloServer({
