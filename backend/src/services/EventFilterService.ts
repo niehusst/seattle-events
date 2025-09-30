@@ -71,10 +71,10 @@ export class EventFilterService {
    * @returns Promise<IEvent[]> The filtered events
    */
   async complexFilter(filters: {
-    category?: string,
-    location?: string,
-    dateRange?: { start: Date, end: Date },
-    searchQuery?: string
+    category?: string;
+    location?: string;
+    dateRange?: { start: Date; end: Date };
+    searchQuery?: string;
   }): Promise<IEvent[]> {
     // Construct filter object for the repository
     const filterObj: any = {};
@@ -83,10 +83,12 @@ export class EventFilterService {
     if (filters.searchQuery) filterObj.searchQuery = filters.searchQuery;
 
     // Date range filter
-    const dateRange = filters.dateRange ? {
-      after: filters.dateRange.start,
-      before: filters.dateRange.end
-    } : undefined;
+    const dateRange = filters.dateRange
+      ? {
+        after: filters.dateRange.start,
+        before: filters.dateRange.end,
+      }
+      : undefined;
 
     return await this.eventRepository.findAll(100, 0, filterObj, dateRange);
   }

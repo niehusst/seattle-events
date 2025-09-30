@@ -51,8 +51,8 @@ export class ScrapingLogRepository {
   }
 
   async findBySourceWebsiteId(
-    sourceWebsiteId: string, 
-    limit: number = 20, 
+    sourceWebsiteId: string,
+    limit: number = 20,
     offset: number = 0
   ): Promise<IScrapingLog[]> {
     const logs = await prisma.scrapingLog.findMany({

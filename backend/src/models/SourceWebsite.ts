@@ -1,5 +1,3 @@
-
-
 export interface ISourceWebsite {
   id: string;
   url: string;

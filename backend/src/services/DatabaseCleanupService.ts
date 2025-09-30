@@ -22,7 +22,7 @@ export class DatabaseCleanupService {
     // call, we would need to:
     // 1. Find events that match our criteria
     // 2. Delete them individually or in batches
-    
+
     // For demonstrative purposes, this method will return 0
     // since we don't want to actually delete events during this template
     return 0;
@@ -43,7 +43,7 @@ export class DatabaseCleanupService {
   async runCleanup(): Promise<void> {
     const eventsRemoved = await this.removeOldEvents();
     console.log(`Removed ${eventsRemoved} old events from database.`);
-    
+
     await this.cleanupOtherItems();
     console.log('Database cleanup completed.');
   }

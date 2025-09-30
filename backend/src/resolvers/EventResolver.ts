@@ -6,7 +6,10 @@ const eventFilterService = new EventFilterService();
 
 export const EventResolver = {
   Query: {
-    events: async (_parent: any, args: { filter?: any; dateRange?: any; limit?: number; offset?: number }) => {
+    events: async (
+      _parent: any,
+      args: { filter?: any; dateRange?: any; limit?: number; offset?: number }
+    ) => {
       const { filter, dateRange, limit = 20, offset = 0 } = args;
       return await eventRepository.findAll(limit, offset, filter, dateRange);
     },

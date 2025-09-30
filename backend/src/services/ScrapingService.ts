@@ -23,15 +23,15 @@ export class ScrapingService {
   }
 
   async initialize(): Promise<void> {
-    this.browser = await puppeteer.launch({ 
+    this.browser = await puppeteer.launch({
       headless: process.env.HEADLESS_BROWSER !== 'false',
-      args: ['--no-sandbox', '--disable-setuid-sandbox']
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
   }
 
   async scrapeAllWebsites(): Promise<void> {
     const websites = await this.sourceWebsiteRepository.findAll();
-    
+
     for (const website of websites) {
       if (website.isActive) {
         await this.scrapeWebsite(website);
@@ -55,16 +55,16 @@ export class ScrapingService {
     try {
       console.log(`Starting scraping for: ${website.url}`);
       page = await this.browser!.newPage();
-      
+
       // Set user agent to avoid blocking
       await page.setUserAgent(
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ' +
-        '(KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+          '(KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
       );
-      
-      await page.goto(website.url, { 
-        waitUntil: 'networkidle2', 
-        timeout: 30000 
+
+      await page.goto(website.url, {
+        waitUntil: 'networkidle2',
+        timeout: 30000,
       });
 
       // Wait for content to load
@@ -108,7 +108,7 @@ export class ScrapingService {
 
       console.log(
         `Scraping completed for ${website.url}: ${eventsAdded} added, ` +
-        `${eventsUpdated} updated, ${eventsSkipped} skipped`
+          `${eventsUpdated} updated, ${eventsSkipped} skipped`
       );
     } catch (error: any) {
       console.error(`Error scraping ${website.url}:`, error);
@@ -121,8 +121,12 @@ export class ScrapingService {
 
     // Log the scraping operation
     const durationMs = Date.now() - startTime;
-    const status = errorDetails ? 'error' : (eventsAdded > 0 || eventsUpdated > 0) ? 'success' : 'partial';
-    
+    const status = errorDetails
+      ? 'error'
+      : eventsAdded > 0 || eventsUpdated > 0
+        ? 'success'
+        : 'partial';
+
     const log: Omit<IScrapingLog, 'id' | 'scrapedAt'> = {
       sourceWebsiteId: website.id,
       status,
@@ -147,32 +151,37 @@ export class ScrapingService {
     // Different selectors for different websites
     // This is a simplified example - in practice, you'd have specific parsing logic for each website
     let eventSelectors = [
-      '.event-item',  // Common class names for events
-      '.event', 
+      '.event-item', // Common class names for events
+      '.event',
       '.listing-item',
       '.activity',
-      '[class*="event"]',  // Any element with "event" in class name
+      '[class*="event"]', // Any element with "event" in class name
     ];
 
     // For visitseattle.org, which was mentioned in the spec
     if (website.url.includes('visitseattle.org')) {
-      eventSelectors = [ '.event-card', '.teaser', '.card' ];
+      eventSelectors = ['.event-card', '.teaser', '.card'];
     } else if (website.url.includes('events12.com')) {
-      eventSelectors = [ '.eventEntry', '.listItem' ];
+      eventSelectors = ['.eventEntry', '.listItem'];
     }
 
     for (const selector of eventSelectors) {
       $(selector).each((index, element) => {
         const title = $(element).find('h1, h2, h3, .title, .event-title').first().text().trim();
-        
+
         if (!title) return; // Skip if no title found
 
         // Extract other event details
-        const description = $(element).find('.description, .event-description, p').first().text().trim();
+        const description = $(element)
+          .find('.description, .event-description, p')
+          .first()
+          .text()
+          .trim();
         const location = $(element).find('.location, .venue, .address').first().text().trim();
-        const dateText = $(element).find('.date, .event-date, time').first().attr('datetime') || 
-                         $(element).find('.date, .event-date, time').first().text().trim();
-        
+        const dateText =
+          $(element).find('.date, .event-date, time').first().attr('datetime') ||
+          $(element).find('.date, .event-date, time').first().text().trim();
+
         // Basic date parsing - in practice this would be more sophisticated
         let startDate: Date | null = null;
         if (dateText) {
@@ -185,7 +194,9 @@ export class ScrapingService {
         // If we couldn't parse a date from the element, try to get it from the website in general
         if (!startDate) {
           // This is a simplified approach; in reality, you might need to visit the event page for details
-          const datesOnPage = $('time').map((i, el) => $(el).attr('datetime') || $(el).text()).get();
+          const datesOnPage = $('time')
+            .map((i, el) => $(el).attr('datetime') || $(el).text())
+            .get();
           for (const dateStr of datesOnPage) {
             const parsed = new Date(dateStr);
             if (!isNaN(parsed.getTime())) {
@@ -202,7 +213,7 @@ export class ScrapingService {
 
         // Extract URL - either from the element itself or a link within it
         let eventUrl = $(element).find('a').first().attr('href') || '';
-        
+
         // If URL is relative, make it absolute
         if (eventUrl && !eventUrl.startsWith('http')) {
           try {

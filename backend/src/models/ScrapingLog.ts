@@ -1,5 +1,3 @@
-
-
 export interface IScrapingLog {
   id: string;
   sourceWebsiteId: string;

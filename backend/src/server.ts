@@ -23,23 +23,23 @@ async function startServer() {
   // Initialize and start the scheduled scraping service
   const scrapingService = new ScheduledScrapingService();
   await scrapingService.start();
-  
+
   console.log('🔄 Scheduled scraping service started');
 
   // Handle graceful shutdown
   process.on('SIGINT', async () => {
     console.log('\n shutting down scheduled scraping...');
     scrapingService.stop();
-    
+
     // Close the Apollo server
     await server.stop();
-    
+
     console.log('✅ Server shutdown complete');
     process.exit(0);
   });
 }
 
-startServer().catch(error => {
+startServer().catch((error) => {
   console.error('Error starting server:', error);
   process.exit(1);
 });

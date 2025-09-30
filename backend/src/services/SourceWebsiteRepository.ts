@@ -20,7 +20,9 @@ export class SourceWebsiteRepository {
     return website as ISourceWebsite | null;
   }
 
-  async create(websiteData: Omit<ISourceWebsite, 'id' | 'createdAt' | 'updatedAt'>): Promise<ISourceWebsite> {
+  async create(
+    websiteData: Omit<ISourceWebsite, 'id' | 'createdAt' | 'updatedAt'>
+  ): Promise<ISourceWebsite> {
     const website = await prisma.sourceWebsite.create({
       data: {
         ...websiteData,
@@ -36,7 +38,8 @@ export class SourceWebsiteRepository {
       where: { id },
       data: {
         ...websiteData,
-        scrapingConfig: websiteData.scrapingConfig !== undefined ? websiteData.scrapingConfig : undefined,
+        scrapingConfig:
+          websiteData.scrapingConfig !== undefined ? websiteData.scrapingConfig : undefined,
       },
     });
 

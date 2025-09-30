@@ -16,9 +16,9 @@ export class ScheduledScrapingService {
     // Schedule the scraping to run daily at 2 AM (as specified in .env.example)
     // The cron expression "0 2 * * *" means: minute 0, hour 2, any day, any month, any day of week
     const cronExpression = process.env.SCRAPE_INTERVAL || '0 2 * * *';
-    
+
     console.log(`Scheduling scraping to run with cron expression: ${cronExpression}`);
-    
+
     this.task = cron.schedule(cronExpression, async () => {
       console.log(`Running scheduled scraping at ${new Date().toISOString()}`);
       try {

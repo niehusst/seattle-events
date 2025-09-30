@@ -34,9 +34,10 @@ export class EventRepository {
         whereClause.startDate = { gte: new Date(dateRange.after) };
       }
       if (dateRange.before) {
-        const beforeDate = whereClause.startDate && typeof whereClause.startDate !== 'string' ? 
-          { ...whereClause.startDate, lte: new Date(dateRange.before) } : 
-          { lte: new Date(dateRange.before) };
+        const beforeDate =
+          whereClause.startDate && typeof whereClause.startDate !== 'string'
+            ? { ...whereClause.startDate, lte: new Date(dateRange.before) }
+            : { lte: new Date(dateRange.before) };
         whereClause.startDate = beforeDate;
       }
     }
@@ -63,7 +64,7 @@ export class EventRepository {
     // Find events on a specific date
     const startOfDay = new Date(date);
     startOfDay.setHours(0, 0, 0, 0);
-    
+
     const endOfDay = new Date(date);
     endOfDay.setHours(23, 59, 59, 999);
 
@@ -132,7 +133,9 @@ export class EventRepository {
       where: { id },
       data: {
         ...eventData,
-        startDate: eventData.startDate ? new Date(eventData.startDate as unknown as string) : undefined,
+        startDate: eventData.startDate
+          ? new Date(eventData.startDate as unknown as string)
+          : undefined,
         endDate: eventData.endDate ? new Date(eventData.endDate as unknown as string) : undefined,
       },
     });
@@ -148,7 +151,11 @@ export class EventRepository {
     return event as IEvent;
   }
 
-  async findByTitleDateLocation(title: string, startDate: Date, locationName: string): Promise<IEvent | null> {
+  async findByTitleDateLocation(
+    title: string,
+    startDate: Date,
+    locationName: string
+  ): Promise<IEvent | null> {
     const event = await prisma.event.findFirst({
       where: {
         title,
