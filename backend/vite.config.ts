@@ -3,10 +3,6 @@ import { resolve } from 'path';
 
 export default defineConfig({
   // Disable Vite's dev server for backend
-  server: {
-    // We're not using the Vite dev server for a backend API
-    // Instead, we'll rely on nodemon or similar for development
-  },
   build: {
     outDir: 'dist',
     lib: {

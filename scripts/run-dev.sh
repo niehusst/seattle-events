@@ -55,6 +55,7 @@ run_backend() {
 run_frontend() {
     echo "Starting frontend server..."
     cd ./frontend
+    source .env
     npm run dev &
     FRONTEND_PID=$!
     cd ..
