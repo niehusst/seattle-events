@@ -1,7 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import { PrismaClient } from '@prisma/client';
 
 // Initialize express app
 const app = express();

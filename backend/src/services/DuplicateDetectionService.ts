@@ -16,11 +16,7 @@ export class DuplicateDetectionService {
    */
   async isDuplicate(title: string, date: Date, location: string): Promise<boolean> {
     // Check if an event with the same title, date and location already exists
-    const existingEvent = await this.eventRepository.findByTitleDateLocation(
-      title,
-      date,
-      location
-    );
+    const existingEvent = await this.eventRepository.findByTitleDateLocation(title, date, location);
 
     return existingEvent !== null;
   }
@@ -33,14 +29,13 @@ export class DuplicateDetectionService {
    */
   async isDuplicateByTitleAndDate(title: string, date: Date): Promise<boolean> {
     // Find events with the same title and date
-    const events = await this.eventRepository.findAll(100, 0, { 
-      searchQuery: title 
+    const events = await this.eventRepository.findAll(100, 0, {
+      searchQuery: title,
     });
 
     // Check if any of these events have the same date
-    const duplicate = events.find(event => 
-      event.title === title && 
-      event.startDate.getTime() === date.getTime()
+    const duplicate = events.find(
+      (event) => event.title === title && event.startDate.getTime() === date.getTime()
     );
 
     return duplicate !== undefined;
@@ -51,12 +46,7 @@ export class DuplicateDetectionService {
    * @returns Promise<number> Number of events removed
    */
   async removeOldEvents(): Promise<number> {
-    // Get current date to compare against
-    const now = new Date();
-    
-    // In a real implementation, we would find events that occurred before 'now'
-    // and delete them. For this example, we'll just return 0 since we don't want
-    // to actually delete events in this template
+    // TODO: actually delete events
     return 0;
   }
 }

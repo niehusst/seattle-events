@@ -1,4 +1,4 @@
-import { PrismaClient, Prisma } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 import { IScrapingLog } from '../models/ScrapingLog';
 
 const prisma = new PrismaClient();
@@ -50,7 +50,11 @@ export class ScrapingLogRepository {
     return log as IScrapingLog;
   }
 
-  async findBySourceWebsiteId(sourceWebsiteId: string, limit: number = 20, offset: number = 0): Promise<IScrapingLog[]> {
+  async findBySourceWebsiteId(
+    sourceWebsiteId: string, 
+    limit: number = 20, 
+    offset: number = 0
+  ): Promise<IScrapingLog[]> {
     const logs = await prisma.scrapingLog.findMany({
       where: { sourceWebsiteId },
       orderBy: { scrapedAt: 'desc' },

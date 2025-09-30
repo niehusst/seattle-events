@@ -1,4 +1,4 @@
-import { PrismaClient, Prisma } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 import { ISourceWebsite } from '../models/SourceWebsite';
 
 const prisma = new PrismaClient();

@@ -1,5 +1,4 @@
 import { ScrapingLogRepository } from '../services/ScrapingLogRepository';
-import { IScrapingLog } from '../models/ScrapingLog';
 
 const scrapingLogRepository = new ScrapingLogRepository();
 

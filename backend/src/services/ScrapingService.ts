@@ -57,9 +57,15 @@ export class ScrapingService {
       page = await this.browser!.newPage();
       
       // Set user agent to avoid blocking
-      await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
+      await page.setUserAgent(
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ' +
+        '(KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+      );
       
-      await page.goto(website.url, { waitUntil: 'networkidle2', timeout: 30000 });
+      await page.goto(website.url, { 
+        waitUntil: 'networkidle2', 
+        timeout: 30000 
+      });
 
       // Wait for content to load
       await page.waitForSelector('body', { timeout: 10000 });
@@ -100,7 +106,10 @@ export class ScrapingService {
         }
       }
 
-      console.log(`Scraping completed for ${website.url}: ${eventsAdded} added, ${eventsUpdated} updated, ${eventsSkipped} skipped`);
+      console.log(
+        `Scraping completed for ${website.url}: ${eventsAdded} added, ` +
+        `${eventsUpdated} updated, ${eventsSkipped} skipped`
+      );
     } catch (error: any) {
       console.error(`Error scraping ${website.url}:`, error);
       errorDetails = error.message || 'Unknown error occurred during scraping';

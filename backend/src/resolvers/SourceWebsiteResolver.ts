@@ -1,5 +1,4 @@
 import { SourceWebsiteRepository } from '../services/SourceWebsiteRepository';
-import { ISourceWebsite } from '../models/SourceWebsite';
 
 const sourceWebsiteRepository = new SourceWebsiteRepository();
 

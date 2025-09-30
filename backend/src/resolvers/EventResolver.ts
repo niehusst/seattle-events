@@ -1,6 +1,5 @@
 import { EventRepository } from '../services/EventRepository';
 import { EventFilterService } from '../services/EventFilterService';
-import { IEvent } from '../models/Event';
 
 const eventRepository = new EventRepository();
 const eventFilterService = new EventFilterService();
@@ -41,7 +40,7 @@ export const EventResolver = {
   },
 
   Mutation: {
-    triggerScrape: async (_parent: any, _args: any, context: any) => {
+    triggerScrape: async (_parent: any, _args: any, _context: any) => {
       // This would trigger the scraping service
       // For now, return true to indicate success
       // In a real implementation, this would call the scraping service
