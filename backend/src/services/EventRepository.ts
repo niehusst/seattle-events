@@ -34,7 +34,7 @@ export class EventRepository {
         whereClause.startDate = { gte: new Date(dateRange.after) };
       }
       if (dateRange.before) {
-        const beforeDate = whereClause.startDate ? 
+        const beforeDate = whereClause.startDate && typeof whereClause.startDate !== 'string' ? 
           { ...whereClause.startDate, lte: new Date(dateRange.before) } : 
           { lte: new Date(dateRange.before) };
         whereClause.startDate = beforeDate;

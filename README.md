@@ -1,3 +1,3 @@
 # Seattle Events
 
-Created using spec-kit.
+Created using spec-kit with Qwen code CLI.

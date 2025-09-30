@@ -1,2 +1,5 @@
 
 .qwen/
+
+.env
+node_modules

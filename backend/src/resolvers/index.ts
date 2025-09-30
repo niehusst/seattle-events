@@ -1,6 +1,6 @@
-import { EventResolver } from './resolvers/EventResolver';
-import { SourceWebsiteResolver } from './resolvers/SourceWebsiteResolver';
-import { ScrapingLogResolver } from './resolvers/ScrapingLogResolver';
+import { EventResolver } from './EventResolver';
+import { SourceWebsiteResolver } from './SourceWebsiteResolver';
+import { ScrapingLogResolver } from './ScrapingLogResolver';
 
 // Combine all resolvers
 export const resolvers = {

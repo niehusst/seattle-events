@@ -210,7 +210,7 @@ export class ScrapingService {
           title,
           description,
           startDate,
-          endDate: null, // Not always available in listings
+          endDate: undefined, // Not always available in listings
           locationName: location || undefined,
           streetAddress: undefined,
           city: undefined,

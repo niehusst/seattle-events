@@ -1,4 +1,4 @@
-import { EventRepository } from '../src/services/EventRepository';
+import { EventRepository } from './EventRepository';
 
 export class DatabaseCleanupService {
   private eventRepository: EventRepository;
