@@ -73,10 +73,11 @@
 ## Phase 3.5: Polish
 - [ ] T019 [P] Unit tests for validation in tests/unit/test_validation.py
 - [ ] T020 Performance tests to ensure <200ms response times
-- [ ] T021 [P] Update docs/api.md
-- [ ] T022 Remove duplication to maintain code quality standards
-- [ ] T023 Run manual-testing.md
-- [ ] T024 Code quality checks with linters and static analysis tools
+- [ ] T021 [P] Accessibility compliance tests to meet WCAG 2.1 AA standards
+- [ ] T022 [P] Update docs/api.md
+- [ ] T023 Remove duplication to maintain code quality standards
+- [ ] T024 Run manual-testing.md
+- [ ] T025 Code quality checks with linters and static analysis tools
 
 ## Dependencies
 - Tests (T004-T007) before implementation (T008-T014)
