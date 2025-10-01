@@ -9,9 +9,9 @@
     "lint": "eslint src",
     "format": "prettier --write src",
     "preview": "vite preview",
-    "test": "vitest",
+    "test": "vitest run",
     "test:ui": "vitest --ui",
-    "test:run": "vitest run"
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@apollo/client": "^3.7.14",

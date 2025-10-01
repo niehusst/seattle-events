@@ -7,15 +7,13 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    children: [
-      {
-        path: '/event/:id',
-        element: <EventDetail />,
-      },
-      {
-        path: '/events-reverse-chronological',
-        element: <EventsReverseChronological />,
-      },
-    ],
+  },
+  {
+    path: '/event/:id',
+    element: <EventDetail />,
+  },
+  {
+    path: '/events-reverse-chronological',
+    element: <EventsReverseChronological />,
   },
 ]);
