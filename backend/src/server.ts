@@ -12,6 +12,10 @@ async function startServer() {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
+    formatError: (err) => {
+      console.error('GraphQL error:', err);
+      return err;
+    },
   });
 
   const { url } = await startStandaloneServer(server, {

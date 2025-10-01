@@ -48,7 +48,6 @@ export class EventRepository {
       skip: offset,
       take: limit,
     });
-
     return events as IEvent[];
   }
 

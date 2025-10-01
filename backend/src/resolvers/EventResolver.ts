@@ -44,9 +44,7 @@ export const EventResolver = {
 
   Mutation: {
     triggerScrape: async (_parent: any, _args: any, _context: any) => {
-      // This would trigger the scraping service
-      // For now, return true to indicate success
-      // In a real implementation, this would call the scraping service
+      // TODO: impl or delete
       console.log('Scraping triggered manually');
       return true;
     },
