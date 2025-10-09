@@ -11,8 +11,8 @@ model Event {
   id              String         @id @default(cuid())
   title           String
   description     String?
-  startDate       DateTime
-  endDate         DateTime?
+  startDate       DateTime?
+  endDate         DateTime
   locationName    String?
   streetAddress   String?
   city            String?
@@ -32,7 +32,7 @@ model Event {
   sourceWebsiteId String
   SourceWebsite   SourceWebsite @relation(fields: [sourceWebsiteId], references: [id])
 
-  @@unique([title, startDate, locationName])
+  @@unique([title, endDate, locationName])
 }
 
 model SourceWebsite {

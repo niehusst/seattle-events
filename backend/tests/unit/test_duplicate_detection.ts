@@ -19,7 +19,7 @@ describe('Unit tests for duplicate detection', () => {
     mockFindByTitleDateLocation.mockResolvedValue({
       id: '1',
       title: 'Test Event',
-      startDate: new Date(),
+      startDate: undefined,
       endDate: new Date(),
       locationName: 'Test Location',
       eventUrl: 'http://example.com',
@@ -64,7 +64,7 @@ describe('Unit tests for duplicate detection', () => {
     mockFindAll.mockResolvedValue([{
       id: '1',
       title: 'Test Event',
-      startDate: new Date(),
+      startDate: undefined,
       endDate: new Date(),
       eventUrl: 'http://example.com',
       createdAt: new Date(),

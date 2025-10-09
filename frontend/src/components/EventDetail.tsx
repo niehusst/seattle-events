@@ -39,8 +39,10 @@ const EventDetail: FC = () => {
         <div className="event-info">
           <h2>Event Information</h2>
           <div className="info-item">
-            <strong>Date:</strong> {formatDate(event.startDate)}
-            {event.endDate && ` - ${formatDate(event.endDate)}`}
+            <strong>Date:</strong> 
+            {event.startDate && formatDate(event.startDate)}
+            {event.startDate && event.endDate && ' - '}
+            {formatDate(event.endDate)}
           </div>
 
           <div className="info-item">

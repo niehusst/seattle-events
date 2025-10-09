@@ -13,10 +13,11 @@ help:
 	@echo "  install        - Install all dependencies for development"
 	@echo "  run            - Run all system components for development"
 	@echo "  clean          - Clean build artifacts and node_modules"
+	@echo "  lint           - Lint all projects"
 	@echo "  db-migrate     - Run database migrations"
 	@echo "  db-gen-schema  - Generate db schema for prisma client"
-	@echo "  db-reset    	- Reset database to initial state"
-	@echo "  db-seed     	- Seed database with sample data for testing"
+	@echo "  db-reset      	- Reset database to initial state"
+	@echo "  db-seed       	- Seed database with sample data for testing"
 	@echo "  db-full-reset  - Drop and recreate database and user from .env"
 
 install:
@@ -54,7 +55,7 @@ db-reset:
 
 db-seed:
 	@echo "Seeding database with sample data..."
-	@cd backend/ && ./scripts/seed-db.js
+	@cd backend/ && ./scripts/seed-db.cjs
 	@echo "Database seeding completed."
 
 db-full-reset:

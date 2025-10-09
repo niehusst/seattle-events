@@ -69,12 +69,12 @@ export class EventRepository {
 
     const events = await prisma.event.findMany({
       where: {
-        startDate: {
+        endDate: {
           gte: startOfDay,
           lte: endOfDay,
         },
       },
-      orderBy: { startDate: 'asc' },
+      orderBy: { endDate: 'asc' },
     });
 
     return events as IEvent[];
@@ -83,7 +83,7 @@ export class EventRepository {
   async findByCategory(category: string): Promise<IEvent[]> {
     const events = await prisma.event.findMany({
       where: { category },
-      orderBy: { startDate: 'asc' },
+      orderBy: { endDate: 'asc' },
     });
 
     return events as IEvent[];
@@ -93,11 +93,11 @@ export class EventRepository {
     const now = new Date();
     const events = await prisma.event.findMany({
       where: {
-        startDate: {
+        endDate: {
           gte: now,
         },
       },
-      orderBy: { startDate: 'asc' },
+      orderBy: { endDate: 'asc' },
       take: limit,
     });
 
@@ -106,7 +106,7 @@ export class EventRepository {
 
   async findReverseChronological(limit: number = 20, offset: number = 0): Promise<IEvent[]> {
     const events = await prisma.event.findMany({
-      orderBy: { startDate: 'desc' },
+      orderBy: { endDate: 'desc' },
       skip: offset,
       take: limit,
     });
@@ -118,8 +118,8 @@ export class EventRepository {
     const event = await prisma.event.create({
       data: {
         ...eventData,
-        startDate: new Date(eventData.startDate),
-        endDate: eventData.endDate ? new Date(eventData.endDate) : undefined,
+        startDate: eventData.startDate ? new Date(eventData.startDate) : undefined,
+        endDate: new Date(eventData.endDate),
         scrapedAt: eventData.scrapedAt ? new Date(eventData.scrapedAt) : undefined,
       },
     });
@@ -152,13 +152,13 @@ export class EventRepository {
 
   async findByTitleDateLocation(
     title: string,
-    startDate: Date,
+    endDate: Date,
     locationName: string
   ): Promise<IEvent | null> {
     const event = await prisma.event.findFirst({
       where: {
         title,
-        startDate: new Date(startDate),
+        endDate,
         locationName,
       },
     });

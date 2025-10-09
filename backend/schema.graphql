@@ -5,8 +5,8 @@ type Event {
   id: ID!
   title: String!
   description: String
-  startDate: DateTime!
-  endDate: DateTime
+  startDate: DateTime
+  endDate: DateTime!
   locationName: String
   streetAddress: String
   city: String

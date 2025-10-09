@@ -17,7 +17,11 @@ const EventCard: FC<EventCardProps> = ({ event }) => {
       <Link to={`/event/${event.id}`} className="event-link">
         <h3>{event.title}</h3>
         {event.imageUrl && <img src={event.imageUrl} alt={event.title} className="event-image" />}
-        <p className="event-date">{formatDate(event.startDate)}</p>
+        <p className="event-date">
+          {event.startDate && formatDate(event.startDate)}
+          {event.startDate && event.endDate && ' - '}
+          {formatDate(event.endDate)}
+        </p>
         {event.locationName && <p className="event-location">{event.locationName}</p>}
         {event.description && (
           <p className="event-description">

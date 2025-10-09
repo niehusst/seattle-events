@@ -71,7 +71,7 @@ export class ScrapingService {
         // Check for duplicates before saving
         const isDuplicate = await this.duplicateDetectionService.isDuplicate(
           event.title,
-          event.startDate,
+          event.endDate,
           event.locationName || ''
         );
 
@@ -179,7 +179,7 @@ export class ScrapingService {
           title,
           description,
           startDate,
-          endDate: undefined, // Not always available in listings
+          endDate: startDate, // Not always available in listings
           locationName: location || undefined,
           streetAddress: undefined,
           city: undefined,

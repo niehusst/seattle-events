@@ -2,8 +2,8 @@ export interface IEvent {
   id: string;
   title: string;
   description?: string;
-  startDate: Date;
-  endDate?: Date;
+  startDate?: Date;
+  endDate: Date;
   locationName?: string;
   streetAddress?: string;
   city?: string;

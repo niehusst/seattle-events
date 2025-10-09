@@ -126,8 +126,8 @@ export interface IEvent {
   id: string;
   title: string;
   description?: string;
-  startDate: string; // ISO string
-  endDate?: string; // ISO string
+  startDate?: string; // ISO string
+  endDate: string; // ISO string
   locationName?: string;
   streetAddress?: string;
   city?: string;

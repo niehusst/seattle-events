@@ -35,7 +35,7 @@ export class DuplicateDetectionService {
 
     // Check if any of these events have the same date
     const duplicate = events.find(
-      (event) => event.title === title && event.startDate.getTime() === date.getTime()
+      (event) => event.title === title && event.endDate.getTime() === date.getTime()
     );
 
     return duplicate !== undefined;

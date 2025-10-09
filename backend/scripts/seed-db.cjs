@@ -121,19 +121,30 @@ async function main() {
   // await prisma.event.deleteMany({});
   // await prisma.sourceWebsite.deleteMany({});
 
-  // Create source websites
-  console.log('Creating source websites...');
+  // Create or update source websites and collect their IDs
+  console.log('Creating/updating source websites...');
+  const createdSourceWebsites = [];
   for (const website of sourceWebsites) {
-    await prisma.sourceWebsite.create({
-      data: website,
+    const created = await prisma.sourceWebsite.upsert({
+      where: { url: website.url },
+      update: website,
+      create: website,
     });
+    createdSourceWebsites.push(created);
   }
 
-  // Create events
+  // Create events with sourceWebsiteId references
   console.log('Creating sample events...');
-  for (const event of sampleEvents) {
+  for (let i = 0; i < sampleEvents.length; i++) {
+    const event = sampleEvents[i];
+    // Assign events to source websites in round-robin fashion
+    const sourceWebsiteId = createdSourceWebsites[i % createdSourceWebsites.length].id;
+    
     await prisma.event.create({
-      data: event,
+      data: {
+        ...event,
+        sourceWebsiteId: sourceWebsiteId,
+      },
     });
   }
 

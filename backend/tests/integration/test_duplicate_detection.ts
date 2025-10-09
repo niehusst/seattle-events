@@ -20,7 +20,7 @@ describe('Integration test for duplicate detection', () => {
     mockFindByTitleDateLocation.mockResolvedValue({
       id: '1',
       title: 'Test Event',
-      startDate: new Date(),
+      startDate: undefined,
       endDate: new Date(),
       locationName: 'Test Location',
       eventUrl: 'https://example.com/event',
@@ -68,8 +68,8 @@ describe('Integration test for duplicate detection', () => {
     mockFindAll.mockResolvedValue([{
       id: '1',
       title: 'Test Event',
-      startDate: testDate,
-      endDate: new Date(),
+      startDate: undefined,
+      endDate: testDate,
       eventUrl: 'https://example.com/event',
       createdAt: new Date(),
       updatedAt: new Date(),
