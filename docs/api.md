@@ -59,62 +59,6 @@ query GetEvent($id: ID!) {
 **Arguments:**
 - `id` (ID!): The ID of the event to retrieve
 
-### eventsReverseChronological
-Get events in reverse chronological order (most recent first).
-
-```graphql
-query GetEventsReverseChronological($limit: Int, $offset: Int) {
-  eventsReverseChronological(limit: $limit, offset: $offset) {
-    # ... same fields as above
-  }
-}
-```
-
-**Arguments:**
-- `limit` (Int): Number of events to return (default: 20)
-- `offset` (Int): Number of events to skip (default: 0)
-
-### eventsByDate
-Get events for a specific date.
-
-```graphql
-query GetEventsByDate($date: Date!) {
-  eventsByDate(date: $date) {
-    # ... same fields as above
-  }
-}
-```
-
-**Arguments:**
-- `date` (Date!): The date to search for events
-
-### eventsByCategory
-Get events filtered by category.
-
-```graphql
-query GetEventsByCategory($category: String!) {
-  eventsByCategory(category: $category) {
-    # ... same fields as above
-  }
-}
-```
-
-**Arguments:**
-- `category` (String!): The category to filter by
-
-### upcomingEvents
-Get upcoming events.
-
-```graphql
-query GetUpcomingEvents($limit: Int) {
-  upcomingEvents(limit: $limit) {
-    # ... same fields as above
-  }
-}
-```
-
-**Arguments:**
-- `limit` (Int): Number of events to return (default: 20)
 
 ### sourceWebsites
 Get all configured source websites.
@@ -135,19 +79,6 @@ query GetSourceWebsites {
 ```
 
 
-## Mutations
-
-### triggerScrape
-Trigger a manual scraping operation for a source website.
-
-```graphql
-mutation TriggerScrape($sourceWebsiteId: ID!) {
-  triggerScrape(sourceWebsiteId: $sourceWebsiteId)
-}
-```
-
-**Arguments:**
-- `sourceWebsiteId` (ID!): The ID of the source website to scrape
 
 ## Types
 

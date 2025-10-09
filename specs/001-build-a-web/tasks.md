@@ -79,7 +79,6 @@
 - [x] T033 Event filtering and search functionality in backend/src/services/EventFilterService.ts
 - [x] T034 Frontend EventList component in frontend/src/components/EventList.tsx
 - [x] T035 Frontend EventDetail component in frontend/src/components/EventDetail.tsx
-- [x] T036 Frontend EventsReverseChronological page in frontend/src/pages/EventsReverseChronological.tsx
 - [x] T037 Frontend EventFilters component in frontend/src/components/EventFilters.tsx
 - [x] T038 Frontend GraphQL client setup in frontend/src/services/graphqlClient.ts
 - [x] T039 Frontend API service for events in frontend/src/services/EventService.ts
@@ -136,7 +135,6 @@ Task: "SourceWebsite model in backend/src/models/SourceWebsite.ts"
 # Launch T034-T037 together (frontend components):
 Task: "Frontend EventList component in frontend/src/components/EventList.tsx"
 Task: "Frontend EventDetail component in frontend/src/components/EventDetail.tsx"
-Task: "Frontend EventsReverseChronological page in frontend/src/pages/EventsReverseChronological.tsx"
 Task: "Frontend EventFilters component in frontend/src/components/EventFilters.tsx"
 ```
 

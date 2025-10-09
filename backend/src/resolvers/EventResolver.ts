@@ -22,31 +22,6 @@ export const EventResolver = {
       return event;
     },
 
-    eventsReverseChronological: async (_parent: any, args: { limit?: number; offset?: number }) => {
-      const { limit = 20, offset = 0 } = args;
-      return await eventFilterService.getEventsReverseChronological(limit, offset);
-    },
-
-    eventsByDate: async (_parent: any, args: { date: string }) => {
-      const date = new Date(args.date);
-      return await eventFilterService.filterByDate(date);
-    },
-
-    eventsByCategory: async (_parent: any, args: { category: string }) => {
-      return await eventFilterService.filterByCategory(args.category);
-    },
-
-    upcomingEvents: async (_parent: any, args: { limit?: number }) => {
-      const { limit = 20 } = args;
-      return await eventFilterService.getUpcomingEvents(limit);
-    },
   },
 
-  Mutation: {
-    triggerScrape: async (_parent: any, _args: any, _context: any) => {
-      // TODO: impl or delete
-      console.log('Scraping triggered manually');
-      return true;
-    },
-  },
 };

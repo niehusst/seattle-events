@@ -64,31 +64,12 @@ type Query {
   # Get a single event by ID
   event(id: ID!): Event
   
-  # Get events in reverse chronological order (most recent first)
-  eventsReverseChronological(
-    limit: Int = 20
-    offset: Int = 0
-  ): [Event!]!
-  
-  # Get events for a specific date
-  eventsByDate(date: Date!): [Event!]!
-  
-  # Get events by category
-  eventsByCategory(category: String!): [Event!]!
-  
-  # Get upcoming events
-  upcomingEvents(limit: Int = 20): [Event!]!
   
   # Get source websites
   sourceWebsites: [SourceWebsite!]!
   
 }
 
-# Mutations (if needed for admin functionality)
-type Mutation {
-  # Trigger a manual scraping operation
-  triggerScrape(sourceWebsiteId: ID!): Boolean!
-}
 
 # Scalar types
 scalar DateTime

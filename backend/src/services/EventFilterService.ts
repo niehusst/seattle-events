@@ -8,42 +8,6 @@ export class EventFilterService {
     this.eventRepository = new EventRepository();
   }
 
-  /**
-   * Filters events by category
-   * @param category The category to filter by
-   * @returns Promise<IEvent[]> The filtered events
-   */
-  async filterByCategory(category: string): Promise<IEvent[]> {
-    return await this.eventRepository.findByCategory(category);
-  }
-
-  /**
-   * Filters events by date
-   * @param date The date to filter by
-   * @returns Promise<IEvent[]> The filtered events
-   */
-  async filterByDate(date: Date): Promise<IEvent[]> {
-    return await this.eventRepository.findByDate(date);
-  }
-
-  /**
-   * Gets upcoming events
-   * @param limit The maximum number of events to return
-   * @returns Promise<IEvent[]> The upcoming events
-   */
-  async getUpcomingEvents(limit: number = 20): Promise<IEvent[]> {
-    return await this.eventRepository.findUpcoming(limit);
-  }
-
-  /**
-   * Gets events in reverse chronological order
-   * @param limit The maximum number of events to return
-   * @param offset The number of events to skip
-   * @returns Promise<IEvent[]> The events ordered by date (descending)
-   */
-  async getEventsReverseChronological(limit: number = 20, offset: number = 0): Promise<IEvent[]> {
-    return await this.eventRepository.findReverseChronological(limit, offset);
-  }
 
   /**
    * Searches events by title or description

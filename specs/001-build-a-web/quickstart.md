@@ -69,17 +69,12 @@ query {
 
 ### 3. Verify Scraping Functionality
 1. Check that the daily scraping job is configured
-2. Manually trigger a scrape using the GraphQL mutation:
-```graphql
-mutation {
-  triggerScrape(sourceWebsiteId: "some-website-id")
-}
-```
+2. Wait for scheduled scraping to complete
 3. Verify new events appear in the database and UI
 
 ### 4. Full User Flow Test
 1. Visit the main events page
-2. Verify events are displayed in reverse chronological order
+2. Verify events are displayed correctly
 3. Click on an event to view its details
 4. Confirm all event information is displayed correctly
 

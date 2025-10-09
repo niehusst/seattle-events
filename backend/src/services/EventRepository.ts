@@ -59,60 +59,6 @@ export class EventRepository {
     return event as IEvent | null;
   }
 
-  async findByDate(date: Date): Promise<IEvent[]> {
-    // Find events on a specific date
-    const startOfDay = new Date(date);
-    startOfDay.setHours(0, 0, 0, 0);
-
-    const endOfDay = new Date(date);
-    endOfDay.setHours(23, 59, 59, 999);
-
-    const events = await prisma.event.findMany({
-      where: {
-        endDate: {
-          gte: startOfDay,
-          lte: endOfDay,
-        },
-      },
-      orderBy: { endDate: 'asc' },
-    });
-
-    return events as IEvent[];
-  }
-
-  async findByCategory(category: string): Promise<IEvent[]> {
-    const events = await prisma.event.findMany({
-      where: { category },
-      orderBy: { endDate: 'asc' },
-    });
-
-    return events as IEvent[];
-  }
-
-  async findUpcoming(limit: number = 20): Promise<IEvent[]> {
-    const now = new Date();
-    const events = await prisma.event.findMany({
-      where: {
-        endDate: {
-          gte: now,
-        },
-      },
-      orderBy: { endDate: 'asc' },
-      take: limit,
-    });
-
-    return events as IEvent[];
-  }
-
-  async findReverseChronological(limit: number = 20, offset: number = 0): Promise<IEvent[]> {
-    const events = await prisma.event.findMany({
-      orderBy: { endDate: 'desc' },
-      skip: offset,
-      take: limit,
-    });
-
-    return events as IEvent[];
-  }
 
   async create(eventData: Omit<IEvent, 'id' | 'createdAt' | 'updatedAt'>): Promise<IEvent> {
     const event = await prisma.event.create({

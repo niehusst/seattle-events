@@ -52,43 +52,19 @@ This guide provides manual testing procedures to verify the functionality of the
 - Multiple filters work correctly together
 - Reset button clears all filters
 
-### 4. Reverse Chronological View
-**Objective**: Verify events can be viewed in reverse chronological order
-
-**Steps**:
-1. Navigate to the "Events in Reverse Chronological Order" page
-2. Verify events are sorted by date (most recent first)
-
-**Expected Results**:
-- Events are displayed with most recent first
-- Date ordering is correct
-
-### 5. Upcoming Events
-**Objective**: Verify the upcoming events feature works
-
-**Steps**:
-1. Navigate to the upcoming events section
-2. Verify only future events are displayed
-3. Check date filtering works correctly
-
-**Expected Results**:
-- Only events with future dates are shown
-- No past events appear in the list
-
-### 6. Scraping Functionality
+### 4. Scraping Functionality
 **Objective**: Verify the event scraping system works
 
 **Steps**:
-1. Execute the triggerScrape mutation in GraphQL
-2. Wait for scraping to complete
-3. Verify new events appear in the database/UI
+1. Wait for scheduled scraping to complete
+2. Verify new events appear in the database/UI
 
 **Expected Results**:
 - Scraping process completes without errors
 - New events are added to the database
 - Duplicate events are not created
 
-### 7. Responsive Design
+### 5. Responsive Design
 **Objective**: Verify the application works on different screen sizes
 
 **Steps**:
