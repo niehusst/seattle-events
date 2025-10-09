@@ -25,7 +25,6 @@ export class SourceWebsiteRepository {
     const website = await prisma.sourceWebsite.create({
       data: {
         ...websiteData,
-        scrapingConfig: websiteData.scrapingConfig || null,
       },
     });
 
@@ -37,8 +36,6 @@ export class SourceWebsiteRepository {
       where: { id },
       data: {
         ...websiteData,
-        scrapingConfig:
-          websiteData.scrapingConfig !== undefined ? websiteData.scrapingConfig : undefined,
       },
     });
 

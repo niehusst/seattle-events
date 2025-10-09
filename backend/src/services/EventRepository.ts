@@ -1,5 +1,5 @@
 import { Prisma } from '@prisma/client';
-import { IEvent } from '../models/Event';
+import { IEvent, IEventPartial } from '../models/Event';
 import { prisma } from '../database';
 
 export class EventRepository {
@@ -59,13 +59,12 @@ export class EventRepository {
   }
 
 
-  async create(eventData: Omit<IEvent, 'id' | 'createdAt' | 'updatedAt'>): Promise<IEvent> {
+  async create(eventData: IEventPartial): Promise<IEvent> {
     const event = await prisma.event.create({
       data: {
         ...eventData,
         startDate: eventData.startDate ? new Date(eventData.startDate) : undefined,
         endDate: new Date(eventData.endDate),
-        scrapedAt: eventData.scrapedAt ? new Date(eventData.scrapedAt) : undefined,
       },
     });
 

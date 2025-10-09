@@ -19,9 +19,7 @@ export interface IEvent {
   contactInfo?: string;
   createdAt: Date;
   updatedAt: Date;
-  scrapedAt?: Date;
   sourceWebsiteId: string;
 }
 
-// The Prisma client will handle the database operations based on the schema
-// This file serves as a type definition and potential extension point for business logic
+export type IEventPartial = Omit<IEvent, 'id' | 'createdAt' | 'updatedAt'>

@@ -48,7 +48,6 @@ describe('Integration test for event scraping functionality', () => {
       isActive: true,
       createdAt: new Date(),
       updatedAt: new Date(),
-      scrapingConfig: null
     } as any]);
 
     // Replace the repositories in the service instance

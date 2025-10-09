@@ -34,7 +34,6 @@ type SourceWebsite {
   lastScrapedAt: DateTime
   createdAt: DateTime!
   updatedAt: DateTime!
-  scrapingConfig: String
 }
 
 
