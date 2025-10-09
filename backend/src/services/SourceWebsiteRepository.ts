@@ -1,7 +1,6 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../database';
 import { ISourceWebsite } from '../models/SourceWebsite';
 
-const prisma = new PrismaClient();
 
 export class SourceWebsiteRepository {
   async findAll(): Promise<ISourceWebsite[]> {

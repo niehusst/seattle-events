@@ -1,7 +1,6 @@
-import { PrismaClient, Prisma } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import { IEvent } from '../models/Event';
-
-const prisma = new PrismaClient();
+import { prisma } from '../database';
 
 export class EventRepository {
   async findAll(
