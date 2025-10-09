@@ -21,7 +21,7 @@ CREATE TABLE "public"."Event" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "scrapedAt" TIMESTAMP(3),
-    "sourceWebsiteId" TEXT,
+    "sourceWebsiteId" TEXT NOT NULL,
 
     CONSTRAINT "Event_pkey" PRIMARY KEY ("id")
 );

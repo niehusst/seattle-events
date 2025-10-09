@@ -29,8 +29,8 @@ model Event {
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
   scrapedAt       DateTime?
-  sourceWebsiteId String?
-  SourceWebsite   SourceWebsite? @relation(fields: [sourceWebsiteId], references: [id])
+  sourceWebsiteId String
+  SourceWebsite   SourceWebsite @relation(fields: [sourceWebsiteId], references: [id])
 
   @@unique([title, startDate, locationName])
 }

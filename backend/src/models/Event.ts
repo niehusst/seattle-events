@@ -20,7 +20,7 @@ export interface IEvent {
   createdAt: Date;
   updatedAt: Date;
   scrapedAt?: Date;
-  sourceWebsiteId?: string;
+  sourceWebsiteId: string;
 }
 
 // The Prisma client will handle the database operations based on the schema

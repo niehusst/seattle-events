@@ -30,6 +30,7 @@ const GET_EVENTS = gql`
       createdAt
       updatedAt
       scrapedAt
+      sourceWebsiteId
     }
   }
 `;
@@ -58,6 +59,7 @@ const GET_EVENT = gql`
       createdAt
       updatedAt
       scrapedAt
+      sourceWebsiteId
     }
   }
 `;
@@ -74,6 +76,7 @@ const GET_REVERSE_CHRONOLOGICAL_EVENTS = gql`
       eventUrl
       imageUrl
       category
+      sourceWebsiteId
     }
   }
 `;
@@ -90,6 +93,7 @@ const GET_EVENTS_BY_CATEGORY = gql`
       eventUrl
       imageUrl
       category
+      sourceWebsiteId
     }
   }
 `;
@@ -106,6 +110,7 @@ const GET_UPCOMING_EVENTS = gql`
       eventUrl
       imageUrl
       category
+      sourceWebsiteId
     }
   }
 `;
@@ -139,6 +144,7 @@ export interface IEvent {
   createdAt: string; // ISO string
   updatedAt: string; // ISO string
   scrapedAt?: string; // ISO string
+  sourceWebsiteId: string;
 }
 
 export interface IEventFilter {

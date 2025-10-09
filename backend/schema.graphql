@@ -23,6 +23,7 @@ type Event {
   createdAt: DateTime!
   updatedAt: DateTime!
   scrapedAt: DateTime
+  sourceWebsiteId: ID!
 }
 
 type SourceWebsite {

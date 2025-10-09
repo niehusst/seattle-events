@@ -17,6 +17,7 @@ const mockEvents = [
     imageUrl: 'https://example.com/image1.jpg',
     category: 'Concert',
     eventUrl: 'https://example.com/event/1',
+    sourceWebsiteId: 'website-1',
     __typename: 'Event',
   },
   {
@@ -29,6 +30,7 @@ const mockEvents = [
     imageUrl: 'https://example.com/image2.jpg',
     category: 'Workshop',
     eventUrl: 'https://example.com/event/2',
+    sourceWebsiteId: 'website-2',
     __typename: 'Event',
   },
 ];

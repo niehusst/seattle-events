@@ -196,6 +196,7 @@ export class ScrapingService {
           createdAt: new Date(),
           updatedAt: new Date(),
           scrapedAt: new Date(),
+          sourceWebsiteId: website.id,
         };
 
         events.push(event);
