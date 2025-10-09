@@ -46,19 +46,5 @@ model SourceWebsite {
   updatedAt      DateTime      @updatedAt
   scrapingConfig Json?
   events         Event[]
-  scrapingLogs   ScrapingLog[]
 }
 
-model ScrapingLog {
-  id              String        @id @default(cuid())
-  sourceWebsiteId String
-  status          String
-  eventsFound     Int
-  eventsAdded     Int
-  eventsUpdated   Int
-  eventsSkipped   Int
-  durationMs      Int
-  errorDetails    String?
-  scrapedAt       DateTime      @default(now())
-  sourceWebsite   SourceWebsite @relation(fields: [sourceWebsiteId], references: [id], onDelete: Cascade)
-}

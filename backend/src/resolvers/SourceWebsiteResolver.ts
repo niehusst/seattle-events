@@ -9,13 +9,4 @@ export const SourceWebsiteResolver = {
     },
   },
 
-  // Add resolver for the nested sourceWebsite field in ScrapingLog
-  ScrapingLog: {
-    sourceWebsite: async (parent: any) => {
-      if (!parent.sourceWebsiteId) {
-        return null;
-      }
-      return await sourceWebsiteRepository.findById(parent.sourceWebsiteId);
-    },
-  },
 };

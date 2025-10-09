@@ -41,21 +41,6 @@ CREATE TABLE "public"."SourceWebsite" (
     CONSTRAINT "SourceWebsite_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
-CREATE TABLE "public"."ScrapingLog" (
-    "id" TEXT NOT NULL,
-    "sourceWebsiteId" TEXT NOT NULL,
-    "status" TEXT NOT NULL,
-    "eventsFound" INTEGER NOT NULL,
-    "eventsAdded" INTEGER NOT NULL,
-    "eventsUpdated" INTEGER NOT NULL,
-    "eventsSkipped" INTEGER NOT NULL,
-    "durationMs" INTEGER NOT NULL,
-    "errorDetails" TEXT,
-    "scrapedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT "ScrapingLog_pkey" PRIMARY KEY ("id")
-);
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Event_title_startDate_locationName_key" ON "public"."Event"("title", "startDate", "locationName");
@@ -66,5 +51,3 @@ CREATE UNIQUE INDEX "SourceWebsite_url_key" ON "public"."SourceWebsite"("url");
 -- AddForeignKey
 ALTER TABLE "public"."Event" ADD CONSTRAINT "Event_sourceWebsiteId_fkey" FOREIGN KEY ("sourceWebsiteId") REFERENCES "public"."SourceWebsite"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
--- AddForeignKey
-ALTER TABLE "public"."ScrapingLog" ADD CONSTRAINT "ScrapingLog_sourceWebsiteId_fkey" FOREIGN KEY ("sourceWebsiteId") REFERENCES "public"."SourceWebsite"("id") ON DELETE CASCADE ON UPDATE CASCADE;

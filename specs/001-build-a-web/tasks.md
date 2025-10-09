@@ -59,7 +59,6 @@
 - [x] T011 [P] Contract test for eventsByCategory query in backend/tests/contract/test_events_by_category.ts
 - [x] T012 [P] Contract test for upcomingEvents query in backend/tests/contract/test_upcoming_events.ts
 - [x] T013 [P] Contract test for sourceWebsites query in backend/tests/contract/test_source_websites.ts
-- [x] T014 [P] Contract test for scrapingLogs query in backend/tests/contract/test_scraping_logs.ts
 - [x] T015 [P] Contract test for triggerScrape mutation in backend/tests/contract/test_trigger_scrape.ts
 - [x] T016 [P] Integration test for event scraping functionality in backend/tests/integration/test_scraping_service.ts
 - [x] T017 [P] Integration test for duplicate detection in backend/tests/integration/test_duplicate_detection.ts
@@ -69,16 +68,13 @@
 ## Phase 3.3: Core Implementation (ONLY after tests are failing)
 - [x] T020 [P] Event model in backend/src/models/Event.ts
 - [x] T021 [P] SourceWebsite model in backend/src/models/SourceWebsite.ts
-- [x] T022 [P] ScrapingLog model in backend/src/models/ScrapingLog.ts
 - [x] T023 Event repository service in backend/src/services/EventRepository.ts
 - [x] T024 SourceWebsite repository service in backend/src/services/SourceWebsiteRepository.ts
-- [x] T025 ScrapingLog repository service in backend/src/services/ScrapingLogRepository.ts
 - [x] T026 Event scraping service in backend/src/services/ScrapingService.ts
 - [x] T027 Duplicate detection logic in backend/src/services/DuplicateDetectionService.ts
 - [x] T028 GraphQL schema definition matching contract in backend/schema.graphql
 - [x] T029 Event resolver in backend/src/resolvers/EventResolver.ts
 - [x] T030 SourceWebsite resolver in backend/src/resolvers/SourceWebsiteResolver.ts
-- [x] T031 ScrapingLog resolver in backend/src/resolvers/ScrapingLogResolver.ts
 - [x] T032 Scheduled scraping service in backend/src/services/ScheduledScrapingService.ts using node-cron
 - [x] T033 Event filtering and search functionality in backend/src/services/EventFilterService.ts
 - [x] T034 Frontend EventList component in frontend/src/components/EventList.tsx
@@ -114,9 +110,9 @@
 
 ## Dependencies
 - Tests (T007-T019) before implementation (T020-T040)
-- T020, T021, T022 blocks T023, T024, T025, T026
-- T023, T024, T025 blocks T029, T030, T031
-- T029, T030, T031 blocks T042
+- T020, T021 blocks T023, T024, T026
+- T023, T024 blocks T029, T030
+- T029, T030 blocks T042
 - T042 blocks T043
 - T038, T039 blocks frontend components (T034-T040)
 - Implementation before polish (T049-T059)
@@ -131,13 +127,11 @@ Task: "Contract test for eventsByDate query in backend/tests/contract/test_event
 Task: "Contract test for eventsByCategory query in backend/tests/contract/test_events_by_category.ts"
 Task: "Contract test for upcomingEvents query in backend/tests/contract/test_upcoming_events.ts"
 Task: "Contract test for sourceWebsites query in backend/tests/contract/test_source_websites.ts"
-Task: "Contract test for scrapingLogs query in backend/tests/contract/test_scraping_logs.ts"
 Task: "Contract test for triggerScrape mutation in backend/tests/contract/test_trigger_scrape.ts"
 
-# Launch T020-T022 together (models):
+# Launch T020-T021 together (models):
 Task: "Event model in backend/src/models/Event.ts"
 Task: "SourceWebsite model in backend/src/models/SourceWebsite.ts"
-Task: "ScrapingLog model in backend/src/models/ScrapingLog.ts"
 
 # Launch T034-T037 together (frontend components):
 Task: "Frontend EventList component in frontend/src/components/EventList.tsx"

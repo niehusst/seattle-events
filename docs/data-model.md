@@ -61,31 +61,7 @@ An entity to track the websites being scraped for event information.
 
 ### Relationships
 - One-to-many with Event (one source website can have many events)
-- One-to-many with ScrapingLog (one source website can have many scraping logs)
 
-## ScrapingLog
-
-An entity to track scraping operations for monitoring and debugging.
-
-### Fields
-- **id** (String, Primary Key): Unique identifier for the log entry
-- **sourceWebsiteId** (String, Required, Foreign Key): Reference to the source website being scraped
-- **status** (String, Required): Status of the scraping operation (e.g., "success", "error", "partial")
-- **eventsFound** (Int): Number of events found during this scraping operation
-- **eventsAdded** (Int): Number of new events added to the database
-- **eventsUpdated** (Int): Number of existing events updated
-- **eventsSkipped** (Int): Number of events skipped (duplicates)
-- **durationMs** (Int): Duration of the scraping operation in milliseconds
-- **errorDetails** (String, Optional): Error message if the scraping operation failed
-- **scrapedAt** (DateTime): Timestamp when the scraping was performed
-
-### Validation Rules
-- status must be one of the allowed values
-- events counts must be non-negative
-- duration must be non-negative
-
-### Relationships
-- Many-to-one with SourceWebsite (many scraping logs for one source website)
 
 ## Implementation Notes
 

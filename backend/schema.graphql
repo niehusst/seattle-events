@@ -37,18 +37,6 @@ type SourceWebsite {
   scrapingConfig: String
 }
 
-type ScrapingLog {
-  id: ID!
-  sourceWebsite: SourceWebsite!
-  status: String!
-  eventsFound: Int!
-  eventsAdded: Int!
-  eventsUpdated: Int!
-  eventsSkipped: Int!
-  durationMs: Int!
-  errorDetails: String
-  scrapedAt: DateTime!
-}
 
 # Input types
 input EventFilterInput {
@@ -95,8 +83,6 @@ type Query {
   # Get source websites
   sourceWebsites: [SourceWebsite!]!
   
-  # Get scraping logs
-  scrapingLogs(limit: Int = 20, offset: Int = 0): [ScrapingLog!]!
 }
 
 # Mutations (if needed for admin functionality)

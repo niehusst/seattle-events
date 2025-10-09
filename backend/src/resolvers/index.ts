@@ -1,25 +1,21 @@
 import { EventResolver } from './EventResolver';
 import { SourceWebsiteResolver } from './SourceWebsiteResolver';
-import { ScrapingLogResolver } from './ScrapingLogResolver';
 
 // Combine all resolvers, merging Query and Mutation fields to avoid overwrites
 const combinedQuery = {
   ...EventResolver.Query,
   ...SourceWebsiteResolver.Query,
-  ...ScrapingLogResolver.Query,
 };
 
 const combinedMutation = {
   ...EventResolver.Mutation,
   ...SourceWebsiteResolver.Mutation,
-  ...ScrapingLogResolver.Mutation,
 };
 
 // Combine all other resolver types
 const combinedOther = {
   ...EventResolver,
   ...SourceWebsiteResolver,
-  ...ScrapingLogResolver,
 };
 
 // Remove Query and Mutation from the 'other' combined object to avoid duplication

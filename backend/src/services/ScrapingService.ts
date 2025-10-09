@@ -2,23 +2,19 @@ import puppeteer, { Browser, Page } from 'puppeteer';
 import * as cheerio from 'cheerio';
 import { EventRepository } from './EventRepository';
 import { SourceWebsiteRepository } from './SourceWebsiteRepository';
-import { ScrapingLogRepository } from './ScrapingLogRepository';
 import { IEvent } from '../models/Event';
 import { ISourceWebsite } from '../models/SourceWebsite';
-import { IScrapingLog } from '../models/ScrapingLog';
 import { DuplicateDetectionService } from './DuplicateDetectionService';
 
 export class ScrapingService {
   private eventRepository: EventRepository;
   private sourceWebsiteRepository: SourceWebsiteRepository;
-  private scrapingLogRepository: ScrapingLogRepository;
   private duplicateDetectionService: DuplicateDetectionService;
   private browser: Browser | null = null;
 
   constructor() {
     this.eventRepository = new EventRepository();
     this.sourceWebsiteRepository = new SourceWebsiteRepository();
-    this.scrapingLogRepository = new ScrapingLogRepository();
     this.duplicateDetectionService = new DuplicateDetectionService();
   }
 
@@ -119,26 +115,7 @@ export class ScrapingService {
       }
     }
 
-    // Log the scraping operation
-    const durationMs = Date.now() - startTime;
-    const status = errorDetails
-      ? 'error'
-      : eventsAdded > 0 || eventsUpdated > 0
-        ? 'success'
-        : 'partial';
-
-    const log: Omit<IScrapingLog, 'id' | 'scrapedAt'> = {
-      sourceWebsiteId: website.id,
-      status,
-      eventsFound,
-      eventsAdded,
-      eventsUpdated,
-      eventsSkipped,
-      durationMs,
-      errorDetails: errorDetails || undefined,
-    };
-
-    await this.scrapingLogRepository.create(log);
+    // TODO: log scraping result to log file
 
     // Update the last scraped time for the website
     await this.sourceWebsiteRepository.updateLastScraped(website.id, new Date());

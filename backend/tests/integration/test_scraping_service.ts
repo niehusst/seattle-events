@@ -2,13 +2,11 @@ import { describe, it, expect, beforeEach, jest } from '@jest/globals';
 import { ScrapingService } from '../../src/services/ScrapingService';
 import { EventRepository } from '../../src/services/EventRepository';
 import { SourceWebsiteRepository } from '../../src/services/SourceWebsiteRepository';
-import { ScrapingLogRepository } from '../../src/services/ScrapingLogRepository';
 import { DuplicateDetectionService } from '../../src/services/DuplicateDetectionService';
 
 // Mock all repositories and services used by the Scraper
 jest.mock('../../src/services/EventRepository');
 jest.mock('../../src/services/SourceWebsiteRepository');
-jest.mock('../../src/services/ScrapingLogRepository');
 jest.mock('../../src/services/DuplicateDetectionService');
 
 describe('Integration test for event scraping functionality', () => {
@@ -25,12 +23,10 @@ describe('Integration test for event scraping functionality', () => {
     // Check that internal services exist
     const eventRepo = (scrapingService as any).eventRepository;
     const sourceWebsiteRepo = (scrapingService as any).sourceWebsiteRepository;
-    const scrapingLogRepo = (scrapingService as any).scrapingLogRepository;
     const duplicateDetectionService = (scrapingService as any).duplicateDetectionService;
     
     expect(eventRepo).toBeDefined();
     expect(sourceWebsiteRepo).toBeDefined();
-    expect(scrapingLogRepo).toBeDefined();
     expect(duplicateDetectionService).toBeDefined();
   });
 
@@ -38,7 +34,6 @@ describe('Integration test for event scraping functionality', () => {
     // Create mocks for all dependencies
     const mockSourceWebsiteRepo = new SourceWebsiteRepository();
     const mockEventRepo = new EventRepository();
-    const mockScrapingLogRepo = new ScrapingLogRepository();
     const mockDuplicateDetection = new DuplicateDetectionService();
     
     // Spy on methods
@@ -67,10 +62,6 @@ describe('Integration test for event scraping functionality', () => {
       writable: true
     });
     
-    Object.defineProperty(scrapingService, 'scrapingLogRepository', {
-      value: mockScrapingLogRepo,
-      writable: true
-    });
     
     Object.defineProperty(scrapingService, 'duplicateDetectionService', {
       value: mockDuplicateDetection,
@@ -84,7 +75,6 @@ describe('Integration test for event scraping functionality', () => {
       // Check that the repositories are set
       expect((scrapingService as any).sourceWebsiteRepository).toBe(mockSourceWebsiteRepo);
       expect((scrapingService as any).eventRepository).toBe(mockEventRepo);
-      expect((scrapingService as any).scrapingLogRepository).toBe(mockScrapingLogRepo);
       expect((scrapingService as any).duplicateDetectionService).toBe(mockDuplicateDetection);
     }).not.toThrow();
   });

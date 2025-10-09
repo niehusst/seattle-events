@@ -135,33 +135,6 @@ query GetSourceWebsites {
 }
 ```
 
-### scrapingLogs
-Get scraping logs with optional pagination.
-
-```graphql
-query GetScrapingLogs($limit: Int, $offset: Int) {
-  scrapingLogs(limit: $limit, offset: $offset) {
-    id
-    status
-    eventsFound
-    eventsAdded
-    eventsUpdated
-    eventsSkipped
-    durationMs
-    errorDetails
-    scrapedAt
-    sourceWebsite {
-      id
-      url
-      name
-    }
-  }
-}
-```
-
-**Arguments:**
-- `limit` (Int): Number of logs to return (default: 20)
-- `offset` (Int): Number of logs to skip (default: 0)
 
 ## Mutations
 
@@ -217,19 +190,6 @@ Represents a website configured for scraping.
 - `updatedAt`: Timestamp when the source was last updated
 - `scrapingConfig`: Configuration for how to scrape this particular website (optional)
 
-### ScrapingLog
-Represents a log entry for a scraping operation.
-
-- `id`: Unique identifier
-- `sourceWebsite`: The source website associated with this log
-- `status`: Status of the scraping operation (e.g., "success", "error", "partial")
-- `eventsFound`: Number of events found during this scraping operation
-- `eventsAdded`: Number of new events added to the database
-- `eventsUpdated`: Number of existing events updated
-- `eventsSkipped`: Number of events skipped (duplicates)
-- `durationMs`: Duration of the scraping operation in milliseconds
-- `errorDetails`: Error message if the scraping operation failed (optional)
-- `scrapedAt`: Timestamp when the scraping was performed
 
 ## Scalars
 
