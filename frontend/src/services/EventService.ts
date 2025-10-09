@@ -1,4 +1,4 @@
-import { gql, useQuery, useMutation } from '@apollo/client';
+import { gql, useQuery, useMutation, QueryHookOptions } from '@apollo/client';
 
 // Define GraphQL queries and mutations
 const GET_EVENTS = gql`
@@ -155,18 +155,24 @@ export interface IEventFilter {
   searchQuery?: string;
 }
 
-// Define service functions
 export const EventService = {
-  // Query hooks
-  useEvents: (limit?: number, offset?: number, filter?: IEventFilter, dateRange?: any) => {
+  useEvents: (
+    limit?: number,
+    offset?: number,
+    filter?: IEventFilter,
+    dateRange?: { start?: string; end?: string },
+    options?: Omit<QueryHookOptions<any, any>, 'variables'>
+  ) => {
     return useQuery(GET_EVENTS, {
       variables: { limit, offset, filter, dateRange },
+      ...options,
     });
   },
 
-  useEvent: (id: string) => {
+  useEvent: (id: string, options?: Omit<QueryHookOptions<any, any>, 'variables'>) => {
     return useQuery(GET_EVENT, {
       variables: { id },
+      ...options,
     });
   },
 
@@ -194,7 +200,8 @@ export const EventService = {
   },
 };
 
-export {
+// Export queries for testing purposes only
+export const __testOnly__ = {
   GET_EVENTS,
   GET_EVENT,
   GET_REVERSE_CHRONOLOGICAL_EVENTS,

@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { useQuery } from '@apollo/client';
-import { GET_EVENTS, IEventFilter } from './services/EventService';
+import { EventService, IEventFilter } from './services/EventService';
 import EventList from './components/EventList';
 import EventFilters from './components/EventFilters';
 
@@ -8,12 +7,7 @@ const App = () => {
   const [filters, setFilters] = useState<IEventFilter>({});
 
   // TODO: enable paging w/ offset
-  const { loading, error, data, refetch } = useQuery(GET_EVENTS, {
-    variables: {
-      filter: filters,
-      limit: 20,
-      offset: 0,
-    },
+  const { loading, error, data, refetch } = EventService.useEvents(20, 0, filters, undefined, {
     // Don't automatically fetch until filters are applied (or for initial load)
     fetchPolicy: 'cache-and-network',
   });

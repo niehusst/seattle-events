@@ -3,7 +3,7 @@ import { describe, it, expect } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/client/testing';
 import App from '../App';
-import { GET_EVENTS } from '../services/EventService';
+import { __testOnly__ } from '../services/EventService';
 
 // Mock data for testing
 const mockEvents = [
@@ -39,7 +39,7 @@ const mockEvents = [
 const mocks = [
   {
     request: {
-      query: GET_EVENTS,
+      query: __testOnly__.GET_EVENTS,
       variables: {
         filter: {},
         limit: 20,

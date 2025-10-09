@@ -41,13 +41,6 @@ export class ScrapingService {
     }
 
     let page: Page | null = null;
-    let startTime = Date.now();
-    let eventsFound = 0;
-    let eventsAdded = 0;
-    let eventsUpdated = 0;
-    let eventsSkipped = 0;
-    let errorDetails: string | null = null;
-
     try {
       console.log(`Starting scraping for: ${website.url}`);
       page = await this.browser!.newPage();
@@ -69,7 +62,10 @@ export class ScrapingService {
       const html = await page.content();
       const events = this.parseEvents(html, website);
 
-      eventsFound = events.length;
+      if (events.length === 0) {
+        // TODO: log issue
+        console.log(`No events found for ${website.url}`);
+      }
 
       for (const event of events) {
         // Check for duplicates before saving
@@ -80,43 +76,19 @@ export class ScrapingService {
         );
 
         if (isDuplicate) {
-          eventsSkipped++;
           continue;
         }
 
-        // Check if the event already exists in the DB - if so, update it
-        const existingEvent = await this.eventRepository.findByTitleDateLocation(
-          event.title,
-          event.startDate,
-          event.locationName || ''
-        );
-
-        if (existingEvent) {
-          // Update the existing event
-          await this.eventRepository.update(existingEvent.id, event);
-          eventsUpdated++;
-        } else {
-          // Create a new event
-          await this.eventRepository.create(event);
-          eventsAdded++;
-        }
+        // Create a new event
+        await this.eventRepository.create(event);
       }
-
-      console.log(
-        `Scraping completed for ${website.url}: ${eventsAdded} added, ` +
-          `${eventsUpdated} updated, ${eventsSkipped} skipped`
-      );
     } catch (error: any) {
       console.error(`Error scraping ${website.url}:`, error);
-      errorDetails = error.message || 'Unknown error occurred during scraping';
     } finally {
       if (page) {
         await page.close();
       }
     }
-
-    // TODO: log scraping result to log file
-
     // Update the last scraped time for the website
     await this.sourceWebsiteRepository.updateLastScraped(website.id, new Date());
   }
