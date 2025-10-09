@@ -1,16 +1,13 @@
-import { describe, it, expect } from '@jest/globals';
+import { describe, it, expect, beforeAll, afterAll } from '@jest/globals';
 import { ApolloServer } from '@apollo/server';
-import { typeDefs } from '../../src/schema';
-import { resolvers } from '../../src/resolvers';
+import { startTestServer } from '../testUtils';
 
 describe('Contract test for events query', () => {
   let server: ApolloServer;
 
   beforeAll(async () => {
-    server = new ApolloServer({
-      typeDefs,
-      resolvers,
-    });
+    const { server: testServer } = await startTestServer();
+    server = testServer;
   });
 
   afterAll(async () => {

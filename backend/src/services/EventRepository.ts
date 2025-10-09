@@ -6,8 +6,8 @@ export class EventRepository {
   async findAll(
     limit: number = 20,
     offset: number = 0,
-    filter?: any,
-    dateRange?: any
+    filter?: { category?: string, location?: string, searchQuery?: string },
+    dateRange?: { after?: Date, before?: Date },
   ): Promise<IEvent[]> {
     const whereClause: Prisma.EventWhereInput = {};
 
@@ -43,7 +43,7 @@ export class EventRepository {
 
     const events = await prisma.event.findMany({
       where: whereClause,
-      orderBy: { startDate: 'asc' },
+      orderBy: { endDate: 'asc' },
       skip: offset,
       take: limit,
     });

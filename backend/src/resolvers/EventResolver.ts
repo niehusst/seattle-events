@@ -1,8 +1,6 @@
 import { EventRepository } from '../services/EventRepository';
-import { EventFilterService } from '../services/EventFilterService';
 
 const eventRepository = new EventRepository();
-const eventFilterService = new EventFilterService();
 
 export const EventResolver = {
   Query: {
