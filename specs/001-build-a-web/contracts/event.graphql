@@ -20,7 +20,6 @@ type Event {
   price: String
   organizer: String
   contactInfo: String
-  sourceWebsite: String!
   createdAt: DateTime!
   updatedAt: DateTime!
   scrapedAt: DateTime

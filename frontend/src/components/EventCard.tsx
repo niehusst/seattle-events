@@ -28,7 +28,9 @@ const EventCard: FC<EventCardProps> = ({ event }) => {
         )}
         <div className="event-meta">
           <span className="event-category">{event.category}</span>
-          <span className="event-source">Source: {event.sourceWebsite}</span>
+          <span className="event-source">
+            Source: <a href={event.eventUrl} target="_blank" rel="noopener noreferrer">{event.eventUrl}</a>
+          </span>
         </div>
       </Link>
     </div>

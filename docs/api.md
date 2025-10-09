@@ -32,7 +32,6 @@ query GetEvents($filter: EventFilterInput, $dateRange: DateTimeFilterInput, $lim
     price
     organizer
     contactInfo
-    sourceWebsite
     createdAt
     updatedAt
     scrapedAt
@@ -173,7 +172,6 @@ Represents an event scraped from a website.
 - `price`: Cost of attending the event (optional)
 - `organizer`: Name of the event organizer (optional)
 - `contactInfo`: Contact information for the event (optional)
-- `sourceWebsite`: The website where the event was scraped from
 - `createdAt`: Timestamp when the event was added to the database
 - `updatedAt`: Timestamp when the event was last updated
 - `scrapedAt`: Timestamp when the event was last scraped (optional)

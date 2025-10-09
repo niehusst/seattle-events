@@ -193,7 +193,6 @@ export class ScrapingService {
           price: undefined,
           organizer: undefined,
           contactInfo: undefined,
-          sourceWebsite: website.url,
           createdAt: new Date(),
           updatedAt: new Date(),
           scrapedAt: new Date(),

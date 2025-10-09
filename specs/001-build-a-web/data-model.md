@@ -22,7 +22,6 @@ The primary entity for storing event information scraped from various websites.
 - **price** (String, Optional): Cost of attending the event
 - **organizer** (String, Optional): Name of the event organizer
 - **contactInfo** (String, Optional): Contact information for the event
-- **sourceWebsite** (String, Required): The website where the event was scraped from
 - **createdAt** (DateTime): Timestamp when the event was added to the database
 - **updatedAt** (DateTime): Timestamp when the event was last updated
 - **scrapedAt** (DateTime): Timestamp when the event was last scraped

@@ -18,7 +18,6 @@ CREATE TABLE "public"."Event" (
     "price" TEXT,
     "organizer" TEXT,
     "contactInfo" TEXT,
-    "sourceWebsite" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "scrapedAt" TIMESTAMP(3),

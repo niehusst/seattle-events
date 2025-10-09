@@ -39,7 +39,6 @@ describe('Contract test for eventsByDate query', () => {
           price
           organizer
           contactInfo
-          sourceWebsite
           createdAt
           updatedAt
           scrapedAt

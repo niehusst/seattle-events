@@ -24,7 +24,6 @@ describe('Integration test for duplicate detection', () => {
       endDate: new Date(),
       locationName: 'Test Location',
       eventUrl: 'https://example.com/event',
-      sourceWebsite: 'example.com',
       createdAt: new Date(),
       updatedAt: new Date(),
     } as any);
@@ -72,7 +71,6 @@ describe('Integration test for duplicate detection', () => {
       startDate: testDate,
       endDate: new Date(),
       eventUrl: 'https://example.com/event',
-      sourceWebsite: 'example.com',
       createdAt: new Date(),
       updatedAt: new Date(),
     } as any]);

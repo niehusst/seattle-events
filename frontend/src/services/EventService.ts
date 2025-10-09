@@ -27,7 +27,6 @@ const GET_EVENTS = gql`
       price
       organizer
       contactInfo
-      sourceWebsite
       createdAt
       updatedAt
       scrapedAt
@@ -56,7 +55,6 @@ const GET_EVENT = gql`
       price
       organizer
       contactInfo
-      sourceWebsite
       createdAt
       updatedAt
       scrapedAt
@@ -76,7 +74,6 @@ const GET_REVERSE_CHRONOLOGICAL_EVENTS = gql`
       eventUrl
       imageUrl
       category
-      sourceWebsite
     }
   }
 `;
@@ -93,7 +90,6 @@ const GET_EVENTS_BY_CATEGORY = gql`
       eventUrl
       imageUrl
       category
-      sourceWebsite
     }
   }
 `;
@@ -110,7 +106,6 @@ const GET_UPCOMING_EVENTS = gql`
       eventUrl
       imageUrl
       category
-      sourceWebsite
     }
   }
 `;
@@ -141,7 +136,6 @@ export interface IEvent {
   price?: string;
   organizer?: string;
   contactInfo?: string;
-  sourceWebsite: string;
   createdAt: string; // ISO string
   updatedAt: string; // ISO string
   scrapedAt?: string; // ISO string

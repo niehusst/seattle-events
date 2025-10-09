@@ -1,7 +1,7 @@
 # Seattle Events Makefile
 # Contains targets for common development tasks
 
-.PHONY: help install run clean db-migrate db-reset db-seed db-full-reset db-gen-schema
+.PHONY: help install run clean lint db-migrate db-reset db-seed db-full-reset db-gen-schema
 
 SHELL := /bin/bash
 
@@ -35,6 +35,12 @@ clean:
 	@rm -rf backend/node_modules
 	@rm -rf frontend/node_modules
 	@echo "Clean complete. Run 'make install' to reinstall dependencies."
+
+lint:
+	@echo "Running linting..."
+	@cd backend && npm run lint
+	@cd frontend && npm run lint
+	@echo "Linting completed."
 
 db-migrate:
 	@echo "Running database migrations..."

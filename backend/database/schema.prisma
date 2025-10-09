@@ -26,7 +26,6 @@ model Event {
   price           String?
   organizer       String?
   contactInfo     String?
-  sourceWebsite   String
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
   scrapedAt       DateTime?

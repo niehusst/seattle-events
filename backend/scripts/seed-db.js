@@ -28,7 +28,6 @@ const sampleEvents = [
     category: 'Technology',
     price: '$199 - $299',
     organizer: 'Tech Seattle',
-    sourceWebsite: 'https://events.example.com',
   },
   {
     title: 'Fremont Fair',
@@ -45,7 +44,6 @@ const sampleEvents = [
     longitude: -122.3491,
     eventUrl: 'https://example.com/fremont-fair',
     category: 'Festival',
-    sourceWebsite: 'https://events.example.com',
   },
   {
     title: 'Pike Place Market Tour',
@@ -62,7 +60,6 @@ const sampleEvents = [
     longitude: -122.3401,
     eventUrl: 'https://example.com/pike-place-tour',
     category: 'Tour',
-    sourceWebsite: 'https://events.example.com',
   },
   {
     title: "Seattle Symphony: Beethoven's Symphony No. 9",
@@ -79,7 +76,6 @@ const sampleEvents = [
     eventUrl: 'https://example.com/symphony-beethoven',
     category: 'Music',
     price: '$35 - $95',
-    sourceWebsite: 'https://events.example.com',
   },
   {
     title: 'Coffee & Code Meetup',
@@ -96,7 +92,6 @@ const sampleEvents = [
     longitude: -122.3355,
     eventUrl: 'https://example.com/coffee-code-meetup',
     category: 'Meetup',
-    sourceWebsite: 'https://events.example.com',
   },
 ];
 
@@ -122,11 +117,9 @@ const sourceWebsites = [
 async function main() {
   console.log('Seeding database with sample data...');
 
-  // Clear existing data (optional - comment out if you don't want to clear)
-  console.log('Clearing existing data...');
-  await prisma.event.deleteMany({});
-  await prisma.sourceWebsite.deleteMany({});
-  await prisma.scrapingLog.deleteMany({});
+  // console.log('Clearing existing data...');
+  // await prisma.event.deleteMany({});
+  // await prisma.sourceWebsite.deleteMany({});
 
   // Create source websites
   console.log('Creating source websites...');

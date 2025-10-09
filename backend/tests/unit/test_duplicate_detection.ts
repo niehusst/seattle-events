@@ -23,7 +23,6 @@ describe('Unit tests for duplicate detection', () => {
       endDate: new Date(),
       locationName: 'Test Location',
       eventUrl: 'http://example.com',
-      sourceWebsite: 'example.com',
       createdAt: new Date(),
       updatedAt: new Date(),
     } as any);
@@ -68,7 +67,6 @@ describe('Unit tests for duplicate detection', () => {
       startDate: new Date(),
       endDate: new Date(),
       eventUrl: 'http://example.com',
-      sourceWebsite: 'example.com',
       createdAt: new Date(),
       updatedAt: new Date(),
     } as any]);
@@ -95,7 +93,6 @@ describe('Unit tests for duplicate detection', () => {
       startDate: new Date(new Date().getTime() + 86400000), // Different date
       endDate: new Date(new Date().getTime() + 86400000),
       eventUrl: 'http://example.com',
-      sourceWebsite: 'example.com',
       createdAt: new Date(),
       updatedAt: new Date(),
     } as any]);
