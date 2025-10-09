@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src",
-    "format": "prettier --write src",
+    "format": "eslint --fix src",
     "preview": "vite preview",
     "test": "vitest run",
     "test:ui": "vitest --ui",
@@ -34,7 +34,6 @@
     "@vitest/ui": "^0.30.1",
     "eslint": "^8.38.0",
     "jsdom": "^27.0.0",
-    "prettier": "^2.8.7",
     "typescript": "^4.9.3",
     "vite": "^4.2.0",
     "vitest": "^0.30.1"
