@@ -2,7 +2,7 @@ import puppeteer, { Browser, Page } from 'puppeteer';
 import * as cheerio from 'cheerio';
 import { EventRepository } from './EventRepository';
 import { SourceWebsiteRepository } from './SourceWebsiteRepository';
-import { type IEventPartial, IEvent } from '../models/Event';
+import { IEventPartial } from '../models/Event';
 import { ISourceWebsite } from '../models/SourceWebsite';
 import { DuplicateDetectionService } from './DuplicateDetectionService';
 

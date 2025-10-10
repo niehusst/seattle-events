@@ -22,4 +22,4 @@ export interface IEvent {
   sourceWebsiteId: string;
 }
 
-export type IEventPartial = Omit<IEvent, 'id' | 'createdAt' | 'updatedAt'>
+export type IEventPartial = Omit<IEvent, 'id' | 'createdAt' | 'updatedAt'>;
