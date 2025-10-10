@@ -1,10 +1,10 @@
 -- CreateTable
-CREATE TABLE "public"."Event" (
+CREATE TABLE "Event" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT,
-    "startDate" TIMESTAMP(3) NOT NULL,
-    "endDate" TIMESTAMP(3),
+    "startDate" TIMESTAMP(3),
+    "endDate" TIMESTAMP(3) NOT NULL,
     "locationName" TEXT,
     "streetAddress" TEXT,
     "city" TEXT,
@@ -27,7 +27,7 @@ CREATE TABLE "public"."Event" (
 );
 
 -- CreateTable
-CREATE TABLE "public"."SourceWebsite" (
+CREATE TABLE "SourceWebsite" (
     "id" TEXT NOT NULL,
     "url" TEXT NOT NULL,
     "name" TEXT NOT NULL,
@@ -35,18 +35,15 @@ CREATE TABLE "public"."SourceWebsite" (
     "lastScrapedAt" TIMESTAMP(3),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "scrapingConfig" JSONB,
 
     CONSTRAINT "SourceWebsite_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateIndex
+CREATE UNIQUE INDEX "Event_title_endDate_locationName_key" ON "Event"("title", "endDate", "locationName");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Event_title_startDate_locationName_key" ON "public"."Event"("title", "startDate", "locationName");
-
--- CreateIndex
-CREATE UNIQUE INDEX "SourceWebsite_url_key" ON "public"."SourceWebsite"("url");
+CREATE UNIQUE INDEX "SourceWebsite_url_key" ON "SourceWebsite"("url");
 
 -- AddForeignKey
-ALTER TABLE "public"."Event" ADD CONSTRAINT "Event_sourceWebsiteId_fkey" FOREIGN KEY ("sourceWebsiteId") REFERENCES "public"."SourceWebsite"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
+ALTER TABLE "Event" ADD CONSTRAINT "Event_sourceWebsiteId_fkey" FOREIGN KEY ("sourceWebsiteId") REFERENCES "SourceWebsite"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -1,6 +1,8 @@
 import { describe, it, expect, beforeAll, afterAll } from '@jest/globals';
 import { ApolloServer } from '@apollo/server';
-import { startTestServer } from '../testUtils';
+import { startTestServer, seedEvent } from '../testUtils';
+import { IEvent } from '../../src/models/Event';
+import { objectMatch } from '../testUtils';
 
 describe('Contract test for events query', () => {
   let server: ApolloServer;
@@ -15,6 +17,8 @@ describe('Contract test for events query', () => {
   });
 
   it('should return a list of events with expected fields', async () => {
+    const event = await seedEvent();
+
     const query = `
       query GetEvents($limit: Int, $offset: Int) {
         events(limit: $limit, offset: $offset) {
@@ -53,10 +57,12 @@ describe('Contract test for events query', () => {
     expect(result.body.kind).toBe('single');
     if (result.body.kind === 'single') {
       expect(result.body.singleResult.data).toBeDefined();
-      // The result can be an empty array if there's no data, which is valid
-      const events = result.body.singleResult.data?.events;
-      // Either it's an array (success case) or undefined (error case)
-      expect(events === undefined || Array.isArray(events)).toBe(true);
+      const events = result.body.singleResult.data!.events as IEvent[];
+      expect(Array.isArray(events)).toBe(true);
+      expect(events.length).toBe(1)
+      
+
+      objectMatch(event, events[0]);
     }
   });
 });

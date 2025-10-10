@@ -3,7 +3,7 @@
 // Seattle Events Database Seeding Script
 // This script populates the database with dummy event data for testing
 
-require('dotenv').config();
+require('dotenv').config({ path: `.env${process.env.NODE_ENV ? `.${process.env.NODE_ENV}` : ''}` });
 const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();

@@ -1,21 +1,10 @@
 import { beforeAll, afterAll, describe, it, expect } from '@jest/globals';
 import { ApolloServer } from '@apollo/server';
-import { startTestServer } from '../testUtils';
+import { objectMatch, seedEvent, startTestServer } from '../testUtils';
 
 describe('Contract test for event query', () => {
   let server: ApolloServer;
-
-  beforeAll(async () => {
-    const { server: testServer } = await startTestServer();
-    server = testServer;
-  });
-
-  afterAll(async () => {
-    await server.stop();
-  });
-
-  it('should return a single event by ID with expected fields', async () => {
-    const query = `
+  const query = `
       query GetEvent($id: ID!) {
         event(id: $id) {
           id
@@ -43,21 +32,45 @@ describe('Contract test for event query', () => {
       }
     `;
 
-    // Execute the GraphQL query using the server instance
-    // Note: This will likely return null since there's no actual data
+  beforeAll(async () => {
+    const { server: testServer } = await startTestServer();
+    server = testServer;
+  });
+
+  afterAll(async () => {
+    await server.stop();
+  });
+
+  it('should return a single event by ID with expected fields', async () => {
+    const event = await seedEvent();
+
+    const result = await server.executeOperation({
+      query: query,
+      variables: { id: event.id }
+    });
+
+    expect(result.body.kind).toBe('single');
+    if (result.body.kind === 'single') {
+      expect(result.body.singleResult.data).toBeDefined();
+      const actualEvent = result.body.singleResult.data?.event;
+      objectMatch(event, actualEvent);
+    }
+  });
+
+  it('should not find an event for nonexistent ID', async () => {
+    const event = await seedEvent();
+
     const result = await server.executeOperation({
       query: query,
       variables: { id: 'non-existent-id' }
     });
 
-    // Verify the result structure
     expect(result.body.kind).toBe('single');
     if (result.body.kind === 'single') {
-      // The event might be null if it doesn't exist, which is valid behavior
       expect(result.body.singleResult.data).toBeDefined();
       // Event query can return null if the event doesn't exist, which is valid
-      const event = result.body.singleResult.data?.event;
-      expect(event === null || event === undefined || typeof event === 'object').toBe(true);
+      const actualEvent = result.body.singleResult.data?.event;
+      expect(actualEvent).toBe(null)
     }
   });
 });
