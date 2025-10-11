@@ -122,6 +122,23 @@ jobs:
     needs: backend-build
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: seattle_events
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    env:
+      - DATABASE_URL: postgresql://postgres:postgres@localhost:5432/seattle_events
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -137,8 +154,15 @@ jobs:
       run: npm ci
       working-directory: backend
 
+    - name: Set DATABASE_URL for tests
+      run: echo "" >> $GITHUB_ENV
+
     - name: Prisma generate schema
       run: npm run prisma:generate
+      working-directory: backend
+
+    - name: Prisma migrate for test database
+      run: npm run prisma:migrate:test
       working-directory: backend
 
     - name: Run backend tests
