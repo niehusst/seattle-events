@@ -154,9 +154,6 @@ jobs:
       run: npm ci
       working-directory: backend
 
-    - name: Set DATABASE_URL for tests
-      run: echo "" >> $GITHUB_ENV
-
     - name: Prisma generate schema
       run: npm run prisma:generate
       working-directory: backend
