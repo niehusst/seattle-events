@@ -154,6 +154,10 @@ jobs:
       run: npm ci
       working-directory: backend
 
+    - name: Create env file
+      run: echo "DATABASE_URL=${{ env.DATABASE_URL }}" > .env
+      working-directory: backend
+
     - name: Prisma generate schema
       run: npm run prisma:generate
       working-directory: backend
@@ -163,7 +167,5 @@ jobs:
       working-directory: backend
 
     - name: Run backend tests
-      run: |
-        echo "DATABASE_URL=${{ env.DATABASE_URL }}" > .env
-        npm run test
+      run: npm run test
       working-directory: backend
