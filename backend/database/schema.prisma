@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Event {
+  id              String         @id @default(cuid())
+  title           String
+  description     String?
+  startDate       DateTime?
+  endDate         DateTime
+  locationName    String?
+  streetAddress   String?
+  city            String?
+  state           String?
+  zipCode         String?
+  latitude        Float?
+  longitude       Float?
+  eventUrl        String
+  imageUrl        String?
+  category        String?
+  price           String?
+  organizer       String?
+  contactInfo     String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  scrapedAt       DateTime?
+  sourceWebsiteId String
+  SourceWebsite   SourceWebsite @relation(fields: [sourceWebsiteId], references: [id])
+
+  @@unique([title, endDate, locationName])
+}
+
+model SourceWebsite {
+  id             String        @id @default(cuid())
+  url            String        @unique
+  name           String
+  isActive       Boolean       @default(true)
+  lastScrapedAt  DateTime?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  events         Event[]
+}
+

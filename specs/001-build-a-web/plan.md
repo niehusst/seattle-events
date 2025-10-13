@@ -1,8 +1,8 @@
 
-# Implementation Plan: [FEATURE]
+# Implementation Plan: Seattle Events Web Application
 
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
+**Branch**: `001-build-a-web` | **Date**: Monday, September 29, 2025 | **Spec**: [link]
+**Input**: Feature specification from `/specs/001-build-a-web/spec.md`
 
 ## Execution Flow (/plan command scope)
 ```
@@ -31,18 +31,18 @@
 - Phase 3-4: Implementation execution (manual or via tools)
 
 ## Summary
-[Extract from feature spec: primary requirement + technical approach from research]
+Build a web application that scrapes Seattle events from various websites on a daily schedule and stores them in a PostgreSQL database without duplicates. The UI displays events in reverse-chronological order with detail pages. The application uses TypeScript with React/Vite frontend and Express.js/GraphQL backend, with performance goals of under 500ms response times. Public access without authentication required.
 
 ## Technical Context
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+**Language/Version**: Typescript with Vite and React for client, express.js and GraphQL on the server
+**Primary Dependencies**: Vite, React, Express.js, GraphQL, Apollo Client/Server, PostgreSQL driver
+**Storage**: PostgreSQL database for event data
+**Testing**: Jest for unit tests, React Testing Library for UI tests, Supertest for API tests
+**Target Platform**: Web application (client-server architecture)
+**Project Type**: Web application with frontend (React) and backend (Express/GraphQL)
+**Performance Goals**: Under 500ms response times for all pages (per spec clarification)
+**Constraints**: Daily scheduled scraping, prevent duplicate events, public access (no auth required)
+**Scale/Scope**: Seattle events web application with reverse-chronological display
 
 ## Constitution Check
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
@@ -50,7 +50,6 @@
 **Code Quality Standards**: All code must adhere to established style guides and pass static analysis
 **Test-Driven Development**: All features must start with test creation before implementation (minimum 85% coverage)
 **Performance Requirements**: All features must meet performance benchmarks before acceptance
-**UI Accessibility Standards**: All user interfaces must meet WCAG 2.1 AA compliance standards
 **Comprehensive Test Coverage**: All functions require unit tests, service interactions need integration tests
 **Quality Assurance Pipeline**: All changes require peer code reviews and automated quality gates
 
@@ -68,50 +67,44 @@ specs/[###-feature]/
 ```
 
 ### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
 ```
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
-src/
-├── models/
-├── services/
-├── cli/
-└── lib/
-
-tests/
-├── contract/
-├── integration/
-└── unit/
-
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
 backend/
 ├── src/
 │   ├── models/
 │   ├── services/
-│   └── api/
-└── tests/
+│   ├── api/
+│   └── scraper/
+├── tests/
+│   ├── unit/
+│   ├── integration/
+│   └── contract/
+├── package.json
+└── schema.graphql
 
 frontend/
 ├── src/
 │   ├── components/
 │   ├── pages/
-│   └── services/
-└── tests/
+│   ├── services/
+│   └── types/
+├── tests/
+│   ├── unit/
+│   └── integration/
+├── package.json
+└── vite.config.ts
 
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
+database/
+├── migrations/
+├── seeds/
+└── schema.sql
 
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+package.json
+tsconfig.json
+docker-compose.yml
+.env.example
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+**Structure Decision**: Web application with separate frontend and backend services, following the identified project type. The backend handles GraphQL API and event scraping while the frontend provides React-based UI. Shared database layer with PostgreSQL migrations and seeds.
 
 ## Phase 0: Outline & Research
 1. **Extract unknowns from Technical Context** above:
@@ -121,10 +114,16 @@ directories captured above]
 
 2. **Generate and dispatch research agents**:
    ```
-   For each unknown in Technical Context:
-     Task: "Research {unknown} for {feature context}"
-   For each technology choice:
-     Task: "Find best practices for {tech} in {domain}"
+   For the event scraping requirement:
+     Task: "Research best practices for web scraping in TypeScript/Node.js"
+   For PostgreSQL integration:
+     Task: "Find best practices for PostgreSQL with TypeScript and GraphQL"
+   For web scraping scheduler:
+     Task: "Research cron job implementations for Node.js event scheduling"
+   For duplicate detection:
+     Task: "Research techniques for detecting duplicate events in PostgreSQL"
+   For GraphQL API design:
+     Task: "Find best practices for GraphQL API design with event data"
    ```
 
 3. **Consolidate findings** in `research.md` using format:
@@ -143,12 +142,12 @@ directories captured above]
    - State transitions if applicable
 
 2. **Generate API contracts** from functional requirements:
-   - For each user action → endpoint
-   - Use standard REST/GraphQL patterns
-   - Output OpenAPI/GraphQL schema to `/contracts/`
+   - GraphQL schema for event queries and any mutations
+   - Standard GraphQL patterns for the event data
+   - Output GraphQL schema to `/contracts/`
 
 3. **Generate contract tests** from contracts:
-   - One test file per endpoint
+   - One test file per GraphQL resolver
    - Assert request/response schemas
    - Tests must fail (no implementation yet)
 
@@ -173,14 +172,16 @@ directories captured above]
 **Task Generation Strategy**:
 - Load `.specify/templates/tasks-template.md` as base
 - Generate tasks from Phase 1 design docs (contracts, data model, quickstart)
-- Each contract → contract test task [P]
-- Each entity → model creation task [P] 
+- Each GraphQL contract → contract test task [P]
+- Each event entity → database model and type creation task [P]
 - Each user story → integration test task
 - Implementation tasks to make tests pass
+- Scraping service implementation tasks
+- Frontend page and component creation tasks
 
 **Ordering Strategy**:
 - TDD order: Tests before implementation 
-- Dependency order: Models before services before UI
+- Dependency order: Database models before services before API before UI
 - Mark [P] for parallel execution (independent files)
 
 **Estimated Output**: 25-30 numbered, ordered tasks in tasks.md
@@ -207,17 +208,17 @@ directories captured above]
 *This checklist is updated during execution flow*
 
 **Phase Status**:
-- [ ] Phase 0: Research complete (/plan command)
-- [ ] Phase 1: Design complete (/plan command)
-- [ ] Phase 2: Task planning complete (/plan command - describe approach only)
+- [x] Phase 0: Research complete (/plan command)
+- [x] Phase 1: Design complete (/plan command)
+- [x] Phase 2: Task planning complete (/plan command - describe approach only)
 - [ ] Phase 3: Tasks generated (/tasks command)
 - [ ] Phase 4: Implementation complete
 - [ ] Phase 5: Validation passed
 
 **Gate Status**:
-- [ ] Initial Constitution Check: PASS
-- [ ] Post-Design Constitution Check: PASS
-- [ ] All NEEDS CLARIFICATION resolved
+- [x] Initial Constitution Check: PASS
+- [x] Post-Design Constitution Check: PASS
+- [x] All NEEDS CLARIFICATION resolved
 - [ ] Complexity deviations documented
 
 ---

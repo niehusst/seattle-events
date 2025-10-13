@@ -1,0 +1,64 @@
+{
+  "name": "seattle-events-backend",
+  "version": "1.0.0",
+  "description": "Backend for Seattle Events Web Application",
+  "type": "module",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "tsx --watch src/server.ts",
+    "build": "vite build",
+    "start": "node dist/server.js",
+    "test": "DATABASE_URL=\"$(grep '^DATABASE_URL=' .env | cut -d= -f2- | tr -d '\"' )_test\" jest",
+    "test:watch": "DATABASE_URL=\"$(grep '^DATABASE_URL=' .env | cut -d= -f2- | tr -d '\"' )_test\" jest --watch",
+    "prisma:generate": "prisma generate --schema=./database/schema.prisma",
+    "prisma:migrate": "prisma migrate dev --schema=./database/schema.prisma",
+    "prisma:migrate:test": "DATABASE_URL=\"$(grep '^DATABASE_URL=' .env | cut -d= -f2- | tr -d '\"' )_test\" npm run prisma:migrate",
+    "lint": "eslint src",
+    "format": "eslint src --fix"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.7.1",
+    "@prisma/client": "^6.17.0",
+    "cheerio": "^1.0.0-rc.12",
+    "graphql": "^16.6.0",
+    "node-cron": "^3.0.2",
+    "prisma": "^6.17.0",
+    "puppeteer": "^19.7.2",
+    "dotenv": "^17.2.3",
+    "winston": "^3.8.2"
+  },
+  "devDependencies": {
+    "@types/cheerio": "^0.22.31",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^4.17.17",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^20.19.0",
+    "@types/node-cron": "^3.0.8",
+    "@types/supertest": "^2.0.12",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/parser": "^5.59.0",
+    "eslint": "^8.38.0",
+    "jest": "^30.2.0",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.4.4",
+    "ts-node": "^10.9.1",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.7"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": ["<rootDir>/tests/jest.setup.ts"],
+    "roots": ["<rootDir>/tests"],
+    "testMatch": ["**/?(*.)+(spec|test).ts?(x)", "**/tests/**/*.ts"],
+    "testPathIgnorePatterns": ["/node_modules/", "/testUtils.ts", "/jest.setup.ts"],
+    "collectCoverageFrom": ["src/**/*.{ts,tsx}", "!src/**/*.d.ts"],
+    "coverageDirectory": "coverage",
+    "coverageReporters": ["text", "lcov", "html"],
+    "transform": {
+      "^.+\\\\.tsx?$": "ts-jest"
+    },
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
+  }
+}

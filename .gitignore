@@ -1,2 +1,7 @@
 
 .qwen/
+
+dist/
+
+.env
+node_modules

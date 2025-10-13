@@ -1,0 +1,76 @@
+# GraphQL Schema for Seattle Events Web Application
+
+# Types
+type Event {
+  id: ID!
+  title: String!
+  description: String
+  startDate: DateTime
+  endDate: DateTime!
+  locationName: String
+  streetAddress: String
+  city: String
+  state: String
+  zipCode: String
+  latitude: Float
+  longitude: Float
+  eventUrl: String!
+  imageUrl: String
+  category: String
+  price: String
+  organizer: String
+  contactInfo: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  scrapedAt: DateTime
+  sourceWebsiteId: ID!
+}
+
+type SourceWebsite {
+  id: ID!
+  url: String!
+  name: String!
+  isActive: Boolean!
+  lastScrapedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+
+# Input types
+input EventFilterInput {
+  category: String
+  location: String
+  startDate: DateTime
+  endDate: DateTime
+  searchQuery: String
+}
+
+input DateTimeFilterInput {
+  after: DateTime
+  before: DateTime
+}
+
+# Queries
+type Query {
+  # Get all events, with optional filtering and pagination
+  events(
+    filter: EventFilterInput
+    dateRange: DateTimeFilterInput
+    limit: Int = 20
+    offset: Int = 0
+  ): [Event!]!
+  
+  # Get a single event by ID
+  event(id: ID!): Event
+  
+  
+  # Get source websites
+  sourceWebsites: [SourceWebsite!]!
+  
+}
+
+
+# Scalar types
+scalar DateTime
+scalar Date

@@ -74,6 +74,7 @@ When creating this spec from a user prompt:
 - **FR-004**: System MUST [data requirement, e.g., "persist user preferences"]
 - **FR-005**: System MUST [behavior, e.g., "log all security events"]
 - **FR-008**: All functionality MUST meet performance benchmarks (e.g., <200ms response times)
+- **FR-010**: All UI components MUST meet WCAG 2.1 AA accessibility standards
 
 *Example of marking unclear requirements:*
 - **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]

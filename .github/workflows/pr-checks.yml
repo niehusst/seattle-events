@@ -1,0 +1,171 @@
+name: PR checks
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  frontend-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v5
+      with:
+        node-version: 20
+        cache: 'npm'
+        cache-dependency-path: '**/package-lock.json'
+
+    - name: Install frontend dependencies
+      run: npm ci
+      working-directory: frontend
+
+    - name: Run frontend linting
+      run: npm run lint
+      working-directory: frontend
+
+  frontend-build:
+    needs: frontend-lint
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v5
+      with:
+        node-version: 20
+        cache: 'npm'
+        cache-dependency-path: '**/package-lock.json'
+
+    - name: Install frontend dependencies
+      run: npm ci
+      working-directory: frontend
+
+    - name: Run frontend build
+      run: npm run build
+      working-directory: frontend
+
+  frontend-test:
+    needs: frontend-build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v5
+      with:
+        node-version: 20
+        cache: 'npm'
+        cache-dependency-path: '**/package-lock.json'
+
+    - name: Install frontend dependencies
+      run: npm ci
+      working-directory: frontend
+      
+    - name: Run frontend tests
+      run: npm run test
+      working-directory: frontend
+
+  backend-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v5
+      with:
+        node-version: 20
+        cache: 'npm'
+        cache-dependency-path: '**/package-lock.json'
+
+    - name: Install backend dependencies
+      run: npm ci
+      working-directory: backend
+
+    - name: Run backend linting
+      run: npm run lint
+      working-directory: backend
+
+  backend-build:
+    needs: backend-lint
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v5
+      with:
+        node-version: 20
+        cache: 'npm'
+        cache-dependency-path: '**/package-lock.json'
+
+    - name: Install dependencies
+      run: npm ci
+      working-directory: backend
+
+    - name: Run backend build
+      run: npm run build
+      working-directory: backend
+
+  backend-test:
+    needs: backend-build
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: seattle_events
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/seattle_events
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v5
+      with:
+        node-version: 20
+        cache: 'npm'
+        cache-dependency-path: '**/package-lock.json'
+
+    - name: Install backend dependencies
+      run: npm ci
+      working-directory: backend
+
+    - name: Create env file
+      run: echo "DATABASE_URL=${{ env.DATABASE_URL }}" > .env
+      working-directory: backend
+
+    - name: Prisma generate schema
+      run: npm run prisma:generate
+      working-directory: backend
+
+    - name: Prisma migrate for test database
+      run: npm run prisma:migrate:test
+      working-directory: backend
+
+    - name: Run backend tests
+      run: npm run test
+      working-directory: backend
