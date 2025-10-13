@@ -160,8 +160,7 @@ jobs:
       working-directory: backend
 
     - name: Run backend tests
-      run: npm run test
+      run: |
+        echo "DATABASE_URL=postgresql://postgres:postgres@localhost:5432/seattle_events" > .env
+        npm run test
       working-directory: backend
-      env:
-        DATABASE_URL: postgresql://postgres:postgres@localhost:5432/seattle_events
-
