@@ -136,6 +136,9 @@ jobs:
         ports:
           - 5432:5432
 
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/seattle_events
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -161,6 +164,6 @@ jobs:
 
     - name: Run backend tests
       run: |
-        echo "DATABASE_URL=postgresql://postgres:postgres@localhost:5432/seattle_events" > .env
+        echo "DATABASE_URL=${{ env.DATABASE_URL }}" > .env
         npm run test
       working-directory: backend
